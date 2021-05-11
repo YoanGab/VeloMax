@@ -25,35 +25,12 @@
                             <RowDefinition Height="20" />
                         </Grid.RowDefinitions>
                         <DockPanel Grid.Row="1" Grid.Column="1">
-                            <DataGrid x:Name="PiecesDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                                    <DataGridTextColumn Header="Référence" Binding="{Binding Reference}" />
-                                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-                                    <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding PrixUnitaire}" />
-                                    <DataGridTextColumn Header="Date d'introduction" Binding="{Binding DateIntroduction}" />
-                                    <DataGridTextColumn Header="Date de fin de vente" Binding="{Binding DateDiscontinuation}" />
-                                    <DataGridTextColumn Header="TypeId" Binding="{Binding TypeId}" />
-                                    <DataGridTextColumn Header="Quantité" Binding="{Binding Quantite}" />
-                                    <DataGridTemplateColumn>
-                                        <DataGridTemplateColumn.HeaderTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="Action" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.HeaderTemplate>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Button x:Name="updatePiece" Content="Update" Click="UpdatePiece_Click"/>
-                                                    <Button x:Name="deletePiece" Content="Delete" Click="DeletePiece_Click"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
+                            <DataGrid Name="PiecesDataGrid" x:FieldModifier="public" AutoGenerateColumns="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
                             </DataGrid >
                         </DockPanel>
                         <Button x:Name="InsertPiece" Content="Insert" Grid.Column="2" Grid.Row="1" Margin="20 0 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="InsertPiece_Click"/>
+                        <Button x:Name="updatePiece" Content="Update" Grid.Column="2" Grid.Row="1" Margin="20 0 0 0" Height="35" Width="300" VerticalAlignment="Center" Click="UpdatePiece_Click"/>
+                        <Button x:Name="deletePiece" Content="Delete" Grid.Column="2" Grid.Row="1" Margin="20 0 0 0" Height="35" Width="300" VerticalAlignment="Bottom" Click="DeletePiece_Click"/>
                     </Grid>
                 </Border>
             </TabItem>
