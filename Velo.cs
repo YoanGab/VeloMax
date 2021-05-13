@@ -8,9 +8,10 @@ namespace VeloMax
 {
     public class Velo
     {
-        public Velo(int id, float prixUnitaire, DateTime dateIntroduction, DateTime dateDiscontinuation, string grandeurId, string ligneProduitId, int quantite)
+        public Velo(int id, string nom, float prixUnitaire, DateTime dateIntroduction, DateTime dateDiscontinuation, int grandeurId, int ligneProduitId, int quantite)
         {
             Id = id;
+            Nom = nom;
             PrixUnitaire = prixUnitaire;
             DateIntroduction = dateIntroduction;
             DateDiscontinuation = dateDiscontinuation;
@@ -20,11 +21,12 @@ namespace VeloMax
         }
 
         public int Id { get; set; }
+        public string Nom { get; set; }
         public float PrixUnitaire { get; set; }
         public DateTime DateIntroduction { get; set; }
         public DateTime DateDiscontinuation { get; set; }
-        public string GrandeurId { get; set; }
-        public string LigneProduitId { get; set; }
+        public int GrandeurId { get; set; }
+        public int LigneProduitId { get; set; }
         public int Quantite { get; set; }
     }
 }

@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
-
+using Newtonsoft.Json;
 
 namespace VeloMax
 {
@@ -25,118 +25,72 @@ namespace VeloMax
     /// </summary>
     public partial class MainWindow : Window
     {
-        MySqlConnection connection;
-        public MainWindow()
+        MySqlConnection Connection;
+        public MainWindow(MySqlConnection connection)
         {
             InitializeComponent();
-            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=Velomax;UID=root;PASSWORD=root;";
-            connection = new MySqlConnection(connectionString);
-            LoadPieces(connection);
+            Connection = connection;
+            LoadData();
         }
 
-        public void LoadPieces(MySqlConnection connection)
+        public void LoadData()
         {
-            connection.Open();
-            //MySqlCommand cmd = new MySqlCommand("SELECT * FROM piece;", connection);
-            MySqlCommand cmd = new MySqlCommand("SELECT p.id, reference, description, prixUnitaire, dateIntroduction, dateDiscontinuation, typeId, nom AS type, quantite FROM piece p " +
-                "JOIN type t ON t.id = p.typeId;", connection);
-            ObservableCollection<Piece> pieces = new ObservableCollection<Piece>();
-            MySqlDataReader reader;
-            reader = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(reader);
-            PiecesDataGrid.DataContext = dt.DefaultView;
-            connection.Close();
-            return;
-            while (reader.Read())
+            LoadPieces();
+            LoadVelos();
+            LoadClients();
+            LoadFournisseurs();
+            LoadCommandes();
+        }
+
+        public void LoadPieces()
+        {
+            Connection.Open();
+            try
             {
-                int id = -1;
-                if (!reader.IsDBNull(0))
-                {
-                    id = reader.GetInt32(0);
-                }
-
-                string reference = "";
-                if (!reader.IsDBNull(1))
-                {
-                    reference = reader.GetString(1);
-                }
-
-                string description = "";
-                if (!reader.IsDBNull(2))
-                {
-                    description = reader.GetString(2);
-                }
-
-                float prixUnitaire = 0;
-                if (!reader.IsDBNull(3))
-                {
-                    prixUnitaire = reader.GetFloat(3);
-                }
-
-                DateTime dateIntroduction = new DateTime();
-                if (!reader.IsDBNull(4))
-                {
-                    dateIntroduction = reader.GetDateTime(4);
-                }
-
-                DateTime dateDiscontinuation = new DateTime();
-                if (!reader.IsDBNull(5))
-                {
-                    dateDiscontinuation = reader.GetDateTime(4);
-                }
-
-                int typeId = -1;
-                if (!reader.IsDBNull(6))
-                {
-                    typeId = reader.GetInt32(6);
-                }
-
-                int quantite = 0;
-                if (!reader.IsDBNull(7))
-                {
-                    quantite = reader.GetInt32(7);
-                }
-
-                pieces.Add(new Piece() { Id = id, Reference = reference, Description = description, PrixUnitaire = prixUnitaire, DateIntroduction = dateIntroduction, DateDiscontinuation = dateDiscontinuation, TypeId = typeId, Quantite = quantite });
+                MySqlCommand cmd = new MySqlCommand("SELECT p.id, reference, description, prixUnitaire, dateIntroduction, dateDiscontinuation, typeId, nom AS type, quantite FROM piece p " +
+                    "JOIN type t ON t.id = p.typeId;", Connection);
+                MySqlDataReader reader;
+                reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                PiecesDataGrid.DataContext = dt.DefaultView;
             }
-            connection.Close();
-            PiecesDataGrid.ItemsSource = pieces;
+            finally
+            {
+            Connection.Close();
+            }
         }
 
         private void InsertPiece_Click(object sender, RoutedEventArgs e)
         {
-            InsertPiece insertPiece = new InsertPiece();
+            InsertPiece insertPiece = new InsertPiece(Connection);
             insertPiece.ShowDialog();
-            LoadPieces(connection);
+            LoadPieces();
         }
 
         private void UpdatePiece_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = PiecesDataGrid.SelectedItem as DataRowView;
             DateTime dateIntroduction = DateTime.ParseExact(data[4].ToString(), "dd/MM/yyyy HH:mm:ss", null);
-
-            //DateTime dateIntroduction = new DateTime();
             DateTime dateDiscontinuation = new DateTime();
             if (data[5].ToString() != "")
             {
                 dateDiscontinuation = DateTime.ParseExact(data[5].ToString(), "dd/MM/yyyy HH:mm:ss", null);
             }
             Piece piece = new Piece(Convert.ToInt32(data[0].ToString()), data[1].ToString(), data[2].ToString(), float.Parse(data[3].ToString()), dateIntroduction, dateDiscontinuation, Convert.ToInt32(data[6].ToString()), Convert.ToInt32(data[8].ToString()));
-            //MessageBox.Show(piece[1].ToString());
-            UpdatePiece updatePage = new UpdatePiece(piece);
+            UpdatePiece updatePage = new UpdatePiece(piece, Connection);
             updatePage.ShowDialog();
-            LoadPieces(connection);
+            LoadPieces();
         }
 
         private void DeletePiece_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = PiecesDataGrid.SelectedItem as DataRowView;
             int id = Convert.ToInt32(data[0].ToString());
-            connection.Open();
+            Connection.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"DELETE FROM piece WHERE id={id}", connection);
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM piece WHERE id={id}", Connection);
                 if (cmd.ExecuteNonQuery() == 0)
                 {
                     MessageBox.Show("Data not deleted !");
@@ -148,9 +102,250 @@ namespace VeloMax
             }
             finally
             {
-                connection.Close();
+                Connection.Close();
             }
-            LoadPieces(connection);
+            LoadPieces();
+        }
+
+        public void LoadVelos()
+        {
+            Connection.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT v.id, v.nom, prixUnitaire, dateIntroduction, dateDiscontinuation, " +
+                    "grandeurId, g.nom AS grandeur, ligneProduitId, lp.nom AS ligneProduit, quantite FROM velo v " +
+                    "JOIN grandeur g ON g.id = v.grandeurId JOIN ligneProduit lp ON lp.id = v.ligneProduitId;", Connection);
+                MySqlDataReader reader;
+                reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                VelosDataGrid.DataContext = dt.DefaultView;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
+        private void InsertVelo_Click(object sender, RoutedEventArgs e)
+        {
+            InsertVelo insertVelo= new InsertVelo(Connection);
+            insertVelo.ShowDialog();
+            LoadVelos();
+        }
+
+        private void UpdateVelo_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView data = VelosDataGrid.SelectedItem as DataRowView;
+            DateTime dateIntroduction = DateTime.ParseExact(data[3].ToString(), "dd/MM/yyyy HH:mm:ss", null);
+            DateTime dateDiscontinuation = new DateTime();
+            if (data[4].ToString() != "")
+            {
+                dateDiscontinuation = DateTime.ParseExact(data[4].ToString(), "dd/MM/yyyy HH:mm:ss", null);
+            }
+            Velo velo = new Velo(Convert.ToInt32(data[0].ToString()), data[1].ToString(), float.Parse(data[2].ToString()), dateIntroduction, dateDiscontinuation, Convert.ToInt32(data[5].ToString()), Convert.ToInt32(data[7].ToString()), Convert.ToInt32(data[9].ToString()));
+            UpdateVelo updateVelo = new UpdateVelo(velo, Connection);
+            updateVelo.ShowDialog();
+            LoadVelos();
+        }
+
+        private void DeleteVelo_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView data = VelosDataGrid.SelectedItem as DataRowView;
+            int id = Convert.ToInt32(data[0].ToString());
+            Connection.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM velo WHERE id={id}", Connection);
+                if (cmd.ExecuteNonQuery() == 0)
+                {
+                    MessageBox.Show("Data not deleted !");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Cette pièce ne peut pas être supprimée !");
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            LoadVelos();
+        }
+
+        public void LoadClients()
+        {
+            Connection.Open();
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM client c LEFT JOIN abonnement a ON a.Id = c.idAbonnement;", Connection);
+            MySqlDataReader reader;
+            reader = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            ClientsDataGrid.DataContext = dt.DefaultView;
+            Connection.Close();
+        }
+
+        private void InsertClient_Click(object sender, RoutedEventArgs e)
+        {
+            InsertClient insertClient = new InsertClient(Connection);
+            insertClient.ShowDialog();
+            LoadClients();
+        }
+
+        private void UpdateClient_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView data = ClientsDataGrid.SelectedItem as DataRowView;
+            int id = Convert.ToInt32(data[0].ToString());
+            bool estEntreprise = data[1].ToString() == "True";
+            string siret = data[2].ToString();
+            string nom = data[3].ToString();
+            string prenom = data[4].ToString();
+            string mail = data[5].ToString();
+            string telephone = data[6].ToString();
+            string rue = data[7].ToString();
+            string ville = data[8].ToString();
+            string codePostal = data[9].ToString();
+            string province = data[10].ToString();
+            bool estAbonne = data[11].ToString() == "True";
+            int idAbonnement;
+            Int32.TryParse(data[12].ToString(), out idAbonnement);
+            
+
+
+            Client client = new Client(id, estEntreprise, siret, nom, prenom, mail, telephone, rue, ville, codePostal, province, estAbonne, idAbonnement);
+            UpdateClient updateClient = new UpdateClient(client, Connection);
+            updateClient.ShowDialog();
+            LoadClients();
+        }
+
+        private void DeleteClient_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void LoadFournisseurs()
+        {
+            Connection.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM fournisseur", Connection);
+                MySqlDataReader reader;
+                reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                FournisseursDataGrid.DataContext = dt.DefaultView;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
+        private void InsertFournisseur_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateFournisseur_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteFournisseur_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void LoadCommandes()
+        {
+            Connection.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT c.*, cl.nom AS nomClient, cl.prenom AS prenomClient FROM commande c " +
+                    "JOIN client cl ON cl.id = c.idClient;", Connection);
+                MySqlDataReader reader;
+                reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                CommandesDataGrid.DataContext = dt.DefaultView;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
+        private void InsertCommande_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateCommande_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteCommande_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AbonnementExportJson_Click(object sender, RoutedEventArgs e)
+        {
+            Connection.Open();
+            try
+            {
+                string request = "SELECT * FROM piece;";
+                MySqlCommand cmd = new MySqlCommand(request, Connection);
+                MySqlDataReader reader;
+                reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                string JSONString = string.Empty;
+                JSONString = JsonConvert.SerializeObject(dt, Formatting.Indented);
+                JSONExport.Text = JSONString;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.ToString());
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
+        private void StockExportXML_Click(object sender, RoutedEventArgs e)
+        {
+            Connection.Open();
+            try
+            {
+                string veloRequest = "SELECT * FROM velo WHERE quantite < 2;";
+                string pieceRequest = "SELECT * FROM piece WHERE quantite < 2;";
+                MySqlCommand cmd = new MySqlCommand(veloRequest, Connection);
+                MySqlDataReader reader;
+                reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                System.IO.StringWriter writer = new System.IO.StringWriter();
+                dt.WriteXml(writer, XmlWriteMode.WriteSchema, true);
+
+                cmd = new MySqlCommand(pieceRequest, Connection);
+                reader = cmd.ExecuteReader();
+                DataTable dtPiece = new DataTable();
+                dtPiece.Load(reader);
+                dtPiece.WriteXml(writer, XmlWriteMode.WriteSchema, true);
+                string dtxml = writer.ToString();
+                XMLExport.Text = dtxml;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.ToString());
+            }
+            finally
+            {
+                Connection.Close();
+            }
         }
     }
 }

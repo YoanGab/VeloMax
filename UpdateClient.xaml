@@ -1,0 +1,72 @@
+﻿<Window x:Class="VeloMax.UpdateClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VeloMax"
+        mc:Ignorable="d"
+        Title="UpdateClient" Height="480" Width="250" Background="#1e847f">
+    <Border Background="#ECC19C" CornerRadius="20" Margin="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Client" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" TextAlignment="Center"/>
+            <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 15 0 0" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Entreprise"  />
+                    <CheckBox x:Name="entrepriseCheckBox" Margin="15 0 0 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                    <TextBlock Text="Siret" />
+                    <TextBox x:Name="siretTextBox" Margin="5 0 0 0" MinWidth="50" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                    <TextBlock Text="Nom" />
+                    <TextBox x:Name="nomTextBox" Margin="5 0 0 0" MinWidth="50" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                    <TextBlock Text="Prénom" />
+                    <TextBox x:Name="prenomTextBox" Margin="5 0 0 0" MinWidth="50" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                    <TextBlock Text="Mail" />
+                    <TextBox x:Name="mailTextBox" Margin="5 0 0 0" MinWidth="50" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                    <TextBlock Text="Téléphone" />
+                    <TextBox x:Name="telephoneTextBox" Margin="5 0 0 0" MinWidth="50" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                    <TextBlock Text="Rue" />
+                    <TextBox x:Name="rueTextBox" Margin="5 0 0 0" MinWidth="50" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                    <TextBlock Text="Ville" />
+                    <TextBox x:Name="villeTextBox" Margin="5 0 0 0" MinWidth="50" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                    <TextBlock Text="Code Postal" />
+                    <TextBox x:Name="codePostalTextBox" Margin="5 0 0 0" MinWidth="50" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                    <TextBlock Text="Province" />
+                    <TextBox x:Name="provinceTextBox" Margin="5 0 0 0" MinWidth="50" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                    <TextBlock Text="Est Abonné" />
+                    <CheckBox x:Name="estAbonneCheckBox" Margin="5 0 0 0" MinWidth="50" />
+                </StackPanel>
+                <Button x:Name="updateClientButton" Content="Mettre à jour" Click="updateClientBtn_Click" Margin="0 20 0 0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

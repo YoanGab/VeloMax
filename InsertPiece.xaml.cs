@@ -20,17 +20,16 @@ namespace VeloMax
     /// </summary>
     public partial class InsertPiece : Window
     {
-        public InsertPiece()
+        MySqlConnection Connection;
+        public InsertPiece(MySqlConnection connection)
         {
             InitializeComponent();
+            Connection = connection;
         }
 
         private void insertPieceBtn_Click(object sender, RoutedEventArgs e)
         {
-            MySqlConnection connection;
-            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=Velomax;UID=root;PASSWORD=root;";
-            connection = new MySqlConnection(connectionString);
-            connection.Open();
+            Connection.Open();
             try
             {
                 string reference = referenceTextBox.Text;
@@ -41,7 +40,7 @@ namespace VeloMax
                 int typeId = Convert.ToInt32(typeIdTextBox.Text);
                 int quantite = Convert.ToInt32(quantiteTextBox.Text);
                 MySqlCommand cmd = new MySqlCommand($"INSERT INTO piece (reference, description, prixUnitaire, dateIntroduction, dateDiscontinuation, typeId, quantite) " +
-                    $"VALUES ('{reference}', '{description}', {prixUnitaire}, {dateIntroduction}, {dateDiscontinuation}, {typeId}, {quantite});", connection);
+                    $"VALUES ('{reference}', '{description}', {prixUnitaire}, {dateIntroduction}, {dateDiscontinuation}, {typeId}, {quantite});", Connection);
                 if (cmd.ExecuteNonQuery() == 1)
                 {
                     MessageBox.Show("Data Inserted !");
@@ -58,7 +57,7 @@ namespace VeloMax
             }
             finally
             {
-                connection.Close();
+                Connection.Close();
             }
         }
     }

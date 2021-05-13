@@ -35,18 +35,16 @@ namespace VeloMax
             try
             {
                 connection.Open();
-                MainWindow dashboard = new MainWindow();
+                connection.Close();
+                MainWindow dashboard = new MainWindow(connection);
                 dashboard.Show();
-                this.Close();                
+                this.Close();
             }
             catch
             {
                 MessageBox.Show("Username or password is incorrect.");
                 txtUsername.Text = "";
                 txtPassword.Password = "";
-            }
-            finally
-            {
                 connection.Close();
             }
         }

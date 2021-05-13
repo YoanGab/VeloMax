@@ -1,0 +1,48 @@
+﻿<Window x:Class="VeloMax.UpdateVelo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VeloMax"
+        mc:Ignorable="d"
+        Title="UpdateVelo" Height="200" Width="630" Background="#1e847f">
+    <Border Background="#ECC19C" CornerRadius="20" Margin="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="textBlock" Text="Vélo" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock x:Name="nomTextBlock" Grid.Column="1" Grid.Row="2" Text="Nom"/>
+            <TextBox x:Name="nomTextBox" Grid.Column="1" Grid.Row="3"/>
+            <TextBlock x:Name="prixTextBlock" Grid.Column="2" Grid.Row="2" Text="Prix Unitaire" Margin="10 0 0 0"/>
+            <TextBox x:Name="prixTextBox" Grid.Column="2" Grid.Row="3" Margin="10 0 0 0"/>
+            <TextBlock x:Name="dateIntroductionTextBlock" Grid.Column="3" Grid.Row="2" Text="Date d'introduction" Margin="10 0 0 0"/>
+            <TextBox x:Name="dateIntroductionTextBox" Grid.Column="3" Grid.Row="3" Margin="10 0 0 0"/>
+            <TextBlock x:Name="dateFinDeVenteTextBlock" Grid.Column="4" Grid.Row="2" Text="Date de fin de vente" Margin="10 0 0 0"/>
+            <TextBox x:Name="dateFinDeVenteTextBox" Grid.Column="4" Grid.Row="3" Margin="10 0 0 0"/>
+            <TextBlock x:Name="grandeurIdTextBlock" Grid.Column="5" Grid.Row="2" Text="Grandeur Id" Margin="10 0 0 0"/>
+            <TextBox x:Name="grandeurIdTextBox" Grid.Column="5" Grid.Row="3" Margin="10 0 0 0"/>
+            <TextBlock x:Name="ligneProduitIdTextBlock" Grid.Column="6" Grid.Row="2" Text="Ligne Produit Id" Margin="10 0 0 0"/>
+            <TextBox x:Name="ligneProduitIdTextBox" Grid.Column="6" Grid.Row="3" Margin="10 0 0 0"/>
+            <TextBlock x:Name="quantiteTextBlock" Grid.Column="7" Grid.Row="2" Text="Quantité" Margin="10 0 0 0"/>
+            <TextBox x:Name="quantiteTextBox" Grid.Column="7" Grid.Row="3" Margin="10 0 0 0"/>
+            <Button x:Name="updateVeloButton" Grid.Column="4" Grid.Row="4" Content="Mettre à jour" Click="UpdateVeloBtn_Click" Margin="5 10 0 0"/>
+        </Grid>
+    </Border>
+</Window>

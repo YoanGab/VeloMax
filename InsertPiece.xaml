@@ -27,20 +27,20 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
-        <TextBlock x:Name="textBlock" Text="Piece" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1"/>
-            <TextBlock x:Name="referenceTextBlock1" Grid.Column="1" Grid.Row="2" Text="Référence"/>
+        <TextBlock Text="Piece" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="Référence"/>
             <TextBox x:Name="referenceTextBox" Grid.Column="1" Grid.Row="3"/>
-            <TextBlock x:Name="descriptionTextBlock" Grid.Column="2" Grid.Row="2" Text="Description" Margin="10 0 0 0"/>
+            <TextBlock Grid.Column="2" Grid.Row="2" Text="Description" Margin="10 0 0 0"/>
             <TextBox x:Name="descriptionTextBox" Grid.Column="2" Grid.Row="3" Margin="10 0 0 0"/>
-            <TextBlock x:Name="prixTextBlock" Grid.Column="3" Grid.Row="2" Text="Prix Unitaire" Margin="10 0 0 0"/>
+            <TextBlock Grid.Column="3" Grid.Row="2" Text="Prix Unitaire" Margin="10 0 0 0"/>
             <TextBox x:Name="prixTextBox" Grid.Column="3" Grid.Row="3" Margin="10 0 0 0"/>
-            <TextBlock x:Name="dateIntoductionTextBlock" Grid.Column="4" Grid.Row="2" Text="Date d'introduction" Margin="10 0 0 0"/>
+            <TextBlock Grid.Column="4" Grid.Row="2" Text="Date d'introduction" Margin="10 0 0 0"/>
             <TextBox x:Name="dateIntroductionTextBox" Grid.Column="4" Grid.Row="3" Margin="10 0 0 0"/>
-            <TextBlock x:Name="dateFinDeVenteTextBlock" Grid.Column="5" Grid.Row="2" Text="Date de fin de vente" Margin="10 0 0 0"/>
+            <TextBlock Grid.Column="5" Grid.Row="2" Text="Date de fin de vente" Margin="10 0 0 0"/>
             <TextBox x:Name="dateFinDeVenteTextBox" Grid.Column="5" Grid.Row="3" Margin="10 0 0 0"/>
-            <TextBlock x:Name="typeIdTextBlock" Grid.Column="6" Grid.Row="2" Text="TypeId" Margin="10 0 0 0"/>
+            <TextBlock Grid.Column="6" Grid.Row="2" Text="TypeId" Margin="10 0 0 0"/>
             <TextBox x:Name="typeIdTextBox" Grid.Column="6" Grid.Row="3" Margin="10 0 0 0"/>
-            <TextBlock x:Name="quantiteTextBlock" Grid.Column="7" Grid.Row="2" Text="Quantité" Margin="10 0 0 0"/>
+            <TextBlock Grid.Column="7" Grid.Row="2" Text="Quantité" Margin="10 0 0 0"/>
             <TextBox x:Name="quantiteTextBox" Grid.Column="7" Grid.Row="3" Margin="10 0 0 0"/>
             <Button x:Name="insertPieceButton" Grid.Column="4" Grid.Row="4" Content="Ajouter" Click="insertPieceBtn_Click" Margin="5 10 0 0"/>
         </Grid>

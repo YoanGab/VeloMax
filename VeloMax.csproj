@@ -38,6 +38,9 @@
     <Reference Include="MySql.Data">
       <HintPath>D:\Bureau\Téléchargements\MySql.Data.dll\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -58,16 +61,57 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AssociateVeloPiece.xaml.cs">
+      <DependentUpon>AssociateVeloPiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClientAbonnement.xaml.cs">
+      <DependentUpon>ClientAbonnement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DesassocierVeloPiece.xaml.cs">
+      <DependentUpon>DesassocierVeloPiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InsertClient.xaml.cs">
+      <DependentUpon>InsertClient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InsertPiece.xaml.cs">
       <DependentUpon>InsertPiece.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InsertVelo.xaml.cs">
+      <DependentUpon>InsertVelo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Type.cs" />
+    <Compile Include="UpdateClient.xaml.cs">
+      <DependentUpon>UpdateClient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdatePiece.xaml.cs">
       <DependentUpon>UpdatePiece.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateVelo.xaml.cs">
+      <DependentUpon>UpdateVelo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Velo.cs" />
     <Compile Include="VeloPiece.cs" />
+    <Page Include="AssociateVeloPiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClientAbonnement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DesassocierVeloPiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InsertClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InsertPiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InsertVelo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,7 +144,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UpdateClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UpdatePiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateVelo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,6 +177,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
