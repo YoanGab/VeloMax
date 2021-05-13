@@ -1,6 +1,7 @@
 drop database if exists Velomax;
 CREATE DATABASE if not exists Velomax;
 use Velomax;
+
 CREATE TABLE `ligneProduit` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `nom` varchar(255) UNIQUE NOT NULL
