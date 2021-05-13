@@ -220,7 +220,26 @@ namespace VeloMax
 
         private void DeleteClient_Click(object sender, RoutedEventArgs e)
         {
-
+            DataRowView data = ClientsDataGrid.SelectedItem as DataRowView;
+            int id = Convert.ToInt32(data[0].ToString());
+            Connection.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM client WHERE id={id}", Connection);
+                if (cmd.ExecuteNonQuery() == 0)
+                {
+                    MessageBox.Show("Data not deleted !");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Cette pièce ne peut pas être supprimée !");
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            LoadVelos();
         }
 
         public void LoadFournisseurs()
