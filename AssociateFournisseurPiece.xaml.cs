@@ -66,10 +66,9 @@ namespace VeloMax
                 MySqlCommand cmd = new MySqlCommand(request, Connection);
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception exc)
+            catch
             {
-                //MessageBox.Show("Champs non valides");
-                MessageBox.Show(exc.ToString());
+                MessageBox.Show("Champs non valides");
             }
             finally
             {

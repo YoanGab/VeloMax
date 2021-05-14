@@ -67,8 +67,20 @@
     <Compile Include="AssociateVeloPiece.xaml.cs">
       <DependentUpon>AssociateVeloPiece.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AssociationCommandePiece.xaml.cs">
+      <DependentUpon>AssociationCommandePiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AssociationCommandeVelo.xaml.cs">
+      <DependentUpon>AssociationCommandeVelo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ClientAbonnement.xaml.cs">
       <DependentUpon>ClientAbonnement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DesassocierCommandePiece.xaml.cs">
+      <DependentUpon>DesassocierCommandePiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DesassocierCommandeVelo.xaml.cs">
+      <DependentUpon>DesassocierCommandeVelo.xaml</DependentUpon>
     </Compile>
     <Compile Include="DesassocierFournisseurPiece.xaml.cs">
       <DependentUpon>DesassocierFournisseurPiece.xaml</DependentUpon>
@@ -78,6 +90,9 @@
     </Compile>
     <Compile Include="InsertClient.xaml.cs">
       <DependentUpon>InsertClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InsertCommande.xaml.cs">
+      <DependentUpon>InsertCommande.xaml</DependentUpon>
     </Compile>
     <Compile Include="InsertFournisseur.xaml.cs">
       <DependentUpon>InsertFournisseur.xaml</DependentUpon>
@@ -91,6 +106,9 @@
     <Compile Include="Type.cs" />
     <Compile Include="UpdateClient.xaml.cs">
       <DependentUpon>UpdateClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateCommande.xaml.cs">
+      <DependentUpon>UpdateCommande.xaml</DependentUpon>
     </Compile>
     <Compile Include="UpdateFournisseur.xaml.cs">
       <DependentUpon>UpdateFournisseur.xaml</DependentUpon>
@@ -111,7 +129,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AssociationCommandePiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AssociationCommandeVelo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ClientAbonnement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DesassocierCommandePiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DesassocierCommandeVelo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InsertClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InsertCommande.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,6 +207,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UpdateClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateCommande.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

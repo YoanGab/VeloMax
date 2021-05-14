@@ -189,8 +189,8 @@ namespace VeloMax
             string request = "SELECT c.*, a.*, SUM(prix) AS totalPrix, SUM(cv.quantite) AS nbVelosAchetes, SUM(cp.quantite) AS nbPiecesAchetes, SUM(cv.quantite) + SUM(cp.quantite) AS nbProduitsAchetes FROM client c " +
                 "LEFT JOIN abonnement a ON a.Id = c.idAbonnement " +
                 "LEFT JOIN commande co ON co.idClient = c.id " +
-                "JOIN commandeVelo cv ON cv.idCommande = co.id " +
-                "JOIN commandePiece cp ON cp.idCommande = co.id " +
+                "LEFT JOIN commandeVelo cv ON cv.idCommande = co.id " +
+                "LEFT JOIN commandePiece cp ON cp.idCommande = co.id " +
                 "GROUP BY c.id;";
             MySqlCommand cmd = new MySqlCommand(request, Connection);
             MySqlDataReader reader;
@@ -356,15 +356,19 @@ namespace VeloMax
 
         private void InsertCommande_Click(object sender, RoutedEventArgs e)
         {
-
+            DataRowView data = ClientsDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                MessageBox.Show("Sélectionnez un client");
+                return;
+            }
+            int id = Convert.ToInt32(data[0].ToString());
+            InsertCommande insertCommande= new InsertCommande(id, Connection);
+            insertCommande.ShowDialog();
+            LoadCommandes();
         }
 
         private void UpdateCommande_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DeleteCommande_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = FournisseursDataGrid.SelectedItem as DataRowView;
             if (data == null)
@@ -372,14 +376,45 @@ namespace VeloMax
                 return;
             }
             int id = Convert.ToInt32(data[0].ToString());
+            DateTime dateCreation = DateTime.ParseExact(data[1].ToString(), "dd/MM/yyyy HH:mm:ss", null);
+            DateTime dateValidation = DateTime.ParseExact(data[2].ToString(), "dd/MM/yyyy HH:mm:ss", null);
+            DateTime dateExpedition = DateTime.ParseExact(data[3].ToString(), "dd/MM/yyyy HH:mm:ss", null);
+            string rueLivraison = data[4].ToString();
+            string villeLivraison = data[5].ToString();
+            string codePostalLivraison = data[6].ToString();
+            string provinceLivraison = data[7].ToString();
+            int idClient = Convert.ToInt32(data[8].ToString());
+            float prix = float.Parse(data[9].ToString());
+            string statut = data[10].ToString();
+            int delai = Convert.ToInt32(data[11].ToString());
+
+            Commande commande = new Commande(id, dateCreation, dateValidation, dateExpedition, rueLivraison, villeLivraison, codePostalLivraison, provinceLivraison, idClient, prix, statut, delai);
+            UpdateCommande updateCommande= new UpdateCommande(commande, Connection);
+            updateCommande.ShowDialog();
+            LoadCommandes();
+        }
+
+        private void DeleteCommande_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView data = CommandesDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                MessageBox.Show("Vous devez selectionner une ligne !");
+                return;
+            }
+            int id = Convert.ToInt32(data[0].ToString());
             Connection.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"DELETE FROM commandeVelo WHERE idCommande={id}", Connection);
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM commandeVelo WHERE idCommande={id};", Connection);
                 cmd.ExecuteNonQuery();
-                cmd = new MySqlCommand($"DELETE FROM commandePiece WHERE idCommande={id}", Connection);
+                cmd = new MySqlCommand($"DELETE FROM commandePiece WHERE idCommande={id};", Connection);
                 cmd.ExecuteNonQuery();
-                cmd = new MySqlCommand($"DELETE FROM commande WHERE id={id}", Connection);
+                cmd = new MySqlCommand($"DELETE FROM commande WHERE id={id};", Connection);
+                if (cmd.ExecuteNonQuery() == 0)
+                {
+                    MessageBox.Show("No row affected");
+                }
             }
             catch
             {
@@ -389,7 +424,7 @@ namespace VeloMax
             {
                 Connection.Close();
             }
-            LoadFournisseurs();
+            LoadCommandes();
         }
 
         private void AbonnementExportJson_Click(object sender, RoutedEventArgs e)

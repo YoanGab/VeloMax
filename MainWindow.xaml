@@ -78,6 +78,7 @@
                         <Button x:Name="InsertClient" Content="Insert" Grid.Column="2" Grid.Row="1" Margin="20 0 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="InsertClient_Click"/>
                         <Button x:Name="updateClient" Content="Update" Grid.Column="2" Grid.Row="1" Margin="20 50 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="UpdateClient_Click"/>
                         <Button x:Name="deleteClient" Content="Delete" Grid.Column="2" Grid.Row="1" Margin="20 100 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="DeleteClient_Click"/>
+                        <Button x:Name="AddCommande" Content="Ajouter Commande" Grid.Column="2" Grid.Row="1" Margin="20 150 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="InsertCommande_Click"/>
                     </Grid>
                 </Border>
             </TabItem>
@@ -123,9 +124,8 @@
                         <DockPanel Grid.Row="1" Grid.Column="1">
                             <DataGrid Name="CommandesDataGrid" AutoGenerateColumns="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}" />
                         </DockPanel>
-                        <Button x:Name="InsertCommande" Content="Insert" Grid.Column="2" Grid.Row="1" Margin="20 0 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="InsertCommande_Click" />
-                        <Button x:Name="updateCommande" Content="Update" Grid.Column="2" Grid.Row="1" Margin="20 50 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="UpdateCommande_Click" />
-                        <Button x:Name="deleteCommande" Content="Delete" Grid.Column="2" Grid.Row="1" Margin="20 100 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="DeleteCommande_Click" />
+                        <Button x:Name="updateCommande" Content="Update" Grid.Column="2" Grid.Row="1" Margin="20 0 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="UpdateCommande_Click" />
+                        <Button x:Name="deleteCommande" Content="Delete" Grid.Column="2" Grid.Row="1" Margin="20 50 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="DeleteCommande_Click" />
                     </Grid>
                 </Border>
             </TabItem>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-        Title="Insertclient" Height="480" Width="250" Background="#1e847f">
+        Title="InsertClient" Height="480" Width="250" Background="#1e847f">
     <Border Background="#ECC19C" CornerRadius="20" Margin="10">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -65,7 +65,7 @@
                     <TextBlock Text="Est Abonné" />
                     <CheckBox x:Name="estAbonneCheckBox" Margin="0 0 25 0" HorizontalAlignment="Right" />
                 </Grid>
-                <Button x:Name="insertClientButton" Content="Ajouter" Click="insertClientBtn_Click" Margin="0 20 0 0"/>
+                <Button x:Name="insertClientButton" Content="Ajouter" Click="InsertClientBtn_Click" Margin="0 20 0 0"/>
             </StackPanel>
         </Grid>
     </Border>
