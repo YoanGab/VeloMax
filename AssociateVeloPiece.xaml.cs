@@ -58,7 +58,11 @@ namespace VeloMax
             try
             {
                 DataRowView data = AssociationVeloPieceDataGrid.SelectedItem as DataRowView;
-                int idPiece = Convert.ToInt32(data[0].ToString());
+                Int32.TryParse(data[0].ToString(), out int idPiece);
+                if (idPiece == 0)
+                {
+                    throw new Exception();
+                }
                 int quantite = Convert.ToInt32(quantiteTextBox.Text);
                 string request = $"INSERT INTO veloPiece (idVelo, idPiece, quantite) VALUES ({IdVelo}, {idPiece}, {quantite});";
                 MySqlCommand cmd = new MySqlCommand(request, Connection);

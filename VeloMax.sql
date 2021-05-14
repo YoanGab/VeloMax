@@ -22,7 +22,8 @@ CREATE TABLE `velo` (
   `dateDiscontinuation` datetime,
   `grandeurId` int,
   `ligneProduitId` int,
-  `quantite` int NOT NULL DEFAULT 0
+  `quantite` int NOT NULL DEFAULT 0,
+  `nbVentes` int NOT NULL DEFAULT 0
 );
 CREATE TABLE `piece` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
@@ -32,7 +33,8 @@ CREATE TABLE `piece` (
   `dateIntroduction` datetime NOT NULL,
   `dateDiscontinuation` datetime,
   `typeId` int,
-  `quantite` int NOT NULL DEFAULT 0
+  `quantite` int NOT NULL DEFAULT 0,
+  `nbVentes` int NOT NULL DEFAULT 0
 );
 CREATE TABLE `veloPiece` (
   `idVelo` int,
@@ -188,7 +190,7 @@ ADD
 ALTER TABLE
   `piece`
 ADD
-  CONSTRAINT UNIQUE_REFERENCE UNIQUE(`reference`, `typeId`)
+  CONSTRAINT UNIQUE_REFERENCE UNIQUE(`reference`, `typeId`);
   
   
 INSERT INTO

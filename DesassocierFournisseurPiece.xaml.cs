@@ -17,16 +17,16 @@ using System.Windows.Shapes;
 namespace VeloMax
 {
     /// <summary>
-    /// Logique d'interaction pour DesassocierVeloPiece.xaml
+    /// Logique d'interaction pour DesassocierFournisseurPiece.xaml
     /// </summary>
-    public partial class DesassocierVeloPiece : Window
+    public partial class DesassocierFournisseurPiece : Window
     {
-        int IdVelo;
+        int IdFournisseur;
         MySqlConnection Connection;
-        public DesassocierVeloPiece(int idVelo, MySqlConnection connection)
+        public DesassocierFournisseurPiece(int idFournisseur, MySqlConnection connection)
         {
             InitializeComponent();
-            IdVelo = idVelo;
+            IdFournisseur = idFournisseur;
             Connection = connection;
             LoadPieces();
         }
@@ -36,14 +36,14 @@ namespace VeloMax
             Connection.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"SELECT p.id, reference, description, prixUnitaire, dateIntroduction, dateDiscontinuation, t.nom, p.quantite AS stock, vp.quantite AS quantiteRequired FROM piece p " +
+                MySqlCommand cmd = new MySqlCommand($"SELECT p.id, reference, description, prixUnitaire, dateIntroduction, dateDiscontinuation, t.nom, p.quantite AS stock, fp.quantite AS stockFournisseur, delai AS delaiFournisseur FROM piece p " +
                     $"JOIN type t ON p.typeId = t.id " +
-                    $"JOIN veloPiece vp ON vp.idPiece = p.id WHERE vp.idVelo = {IdVelo};", Connection);
+                    $"JOIN fournisseurPiece fp ON fp.idPiece = p.id WHERE fp.idFournisseur = {IdFournisseur};", Connection);
                 MySqlDataReader reader;
                 reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
                 dt.Load(reader);
-                DesassociationVeloPieceDataGrid.DataContext = dt.DefaultView;
+                DesassociationFournisseurPieceDataGrid.DataContext = dt.DefaultView;
             }
             finally
             {
@@ -51,24 +51,16 @@ namespace VeloMax
             }
         }
 
-        private void DesassocierVeloPiece_Click(object sender, RoutedEventArgs e)
+        private void DesassocierFournisseurPiece_Click(object sender, RoutedEventArgs e)
         {
             Connection.Open();
             try
             {
-                DataRowView data = DesassociationVeloPieceDataGrid.SelectedItem as DataRowView;
-                Int32.TryParse(data[0].ToString(), out int idPiece);
-                if (idPiece == 0)
-                {
-                    throw new Exception();
-                }
-                string request = $"DELETE FROM veloPiece WHERE idVelo = {IdVelo} AND idPiece= {idPiece};";
+                DataRowView data = DesassociationFournisseurPieceDataGrid.SelectedItem as DataRowView;
+                int idPiece = Convert.ToInt32(data[0].ToString());
+                string request = $"DELETE FROM fournisseurPiece WHERE idFournisseur = {IdFournisseur} AND idPiece= {idPiece};";
                 MySqlCommand cmd = new MySqlCommand(request, Connection);
                 cmd.ExecuteNonQuery();
-            }
-            catch
-            {
-                MessageBox.Show("Error");
             }
             finally
             {
@@ -77,7 +69,7 @@ namespace VeloMax
             LoadPieces();
         }
 
-        private void TerminerVeloPiece_Click(object sender, RoutedEventArgs e)
+        private void TerminerFournisseurPiece_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

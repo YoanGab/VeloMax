@@ -42,7 +42,7 @@
             <TextBox x:Name="ligneProduitIdTextBox" Grid.Column="6" Grid.Row="3" Margin="10 0 0 0"/>
             <TextBlock x:Name="quantiteTextBlock" Grid.Column="7" Grid.Row="2" Text="Quantité" Margin="10 0 0 0"/>
             <TextBox x:Name="quantiteTextBox" Grid.Column="7" Grid.Row="3" Margin="10 0 0 0"/>
-            <Button x:Name="insertVeloButton" Grid.Column="4" Grid.Row="4" Content="Ajouter" Click="insertVeloBtn_Click" Margin="5 10 0 0"/>
+            <Button x:Name="insertVeloButton" Grid.Column="4" Grid.Row="4" Content="Ajouter" Click="InsertVeloBtn_Click" Margin="5 10 0 0"/>
         </Grid>
     </Border>
 </Window>

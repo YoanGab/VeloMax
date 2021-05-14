@@ -8,9 +8,9 @@ namespace VeloMax
 {
     public class Fournisseur
     {
-        public Fournisseur(int idFournisseur, string siret, string nom, string nomContact, string prenomContact, string mailContact, string rue, string ville, string codePostal, string province, int libelle)
+        public Fournisseur(int id, string siret, string nom, string nomContact, string prenomContact, string mailContact, string rue, string ville, string codePostal, string province, int libelle)
         {
-            IdFournisseur = idFournisseur;
+            Id = id;
             Siret = siret;
             Nom = nom;
             NomContact = nomContact;
@@ -23,7 +23,7 @@ namespace VeloMax
             Libelle = libelle;
         }
 
-        public int IdFournisseur { get; set; }
+        public int Id{ get; set; }
         public string Siret { get; set; }
         public string Nom { get; set; }
         public string NomContact { get; set; }

@@ -61,17 +61,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AssociateFournisseurPiece.xaml.cs">
+      <DependentUpon>AssociateFournisseurPiece.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AssociateVeloPiece.xaml.cs">
       <DependentUpon>AssociateVeloPiece.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClientAbonnement.xaml.cs">
       <DependentUpon>ClientAbonnement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DesassocierFournisseurPiece.xaml.cs">
+      <DependentUpon>DesassocierFournisseurPiece.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DesassocierVeloPiece.xaml.cs">
       <DependentUpon>DesassocierVeloPiece.xaml</DependentUpon>
     </Compile>
     <Compile Include="InsertClient.xaml.cs">
       <DependentUpon>InsertClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InsertFournisseur.xaml.cs">
+      <DependentUpon>InsertFournisseur.xaml</DependentUpon>
     </Compile>
     <Compile Include="InsertPiece.xaml.cs">
       <DependentUpon>InsertPiece.xaml</DependentUpon>
@@ -83,6 +92,9 @@
     <Compile Include="UpdateClient.xaml.cs">
       <DependentUpon>UpdateClient.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateFournisseur.xaml.cs">
+      <DependentUpon>UpdateFournisseur.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdatePiece.xaml.cs">
       <DependentUpon>UpdatePiece.xaml</DependentUpon>
     </Compile>
@@ -91,6 +103,10 @@
     </Compile>
     <Compile Include="Velo.cs" />
     <Compile Include="VeloPiece.cs" />
+    <Page Include="AssociateFournisseurPiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AssociateVeloPiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,11 +115,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DesassocierFournisseurPiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DesassocierVeloPiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InsertClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InsertFournisseur.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,6 +169,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UpdateClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateFournisseur.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

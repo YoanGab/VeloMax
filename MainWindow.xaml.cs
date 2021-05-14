@@ -47,7 +47,7 @@ namespace VeloMax
             Connection.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand("SELECT p.id, reference, description, prixUnitaire, dateIntroduction, dateDiscontinuation, typeId, nom AS type, quantite FROM piece p " +
+                MySqlCommand cmd = new MySqlCommand("SELECT p.id, reference, description, prixUnitaire, dateIntroduction, dateDiscontinuation, typeId, nom AS type, quantite, nbVentes FROM piece p " +
                     "JOIN type t ON t.id = p.typeId;", Connection);
                 MySqlDataReader reader;
                 reader = cmd.ExecuteReader();
@@ -113,7 +113,7 @@ namespace VeloMax
             try
             {
                 MySqlCommand cmd = new MySqlCommand("SELECT v.id, v.nom, prixUnitaire, dateIntroduction, dateDiscontinuation, " +
-                    "grandeurId, g.nom AS grandeur, ligneProduitId, lp.nom AS ligneProduit, quantite FROM velo v " +
+                    "grandeurId, g.nom AS grandeur, ligneProduitId, lp.nom AS ligneProduit, quantite, nbVentes FROM velo v " +
                     "JOIN grandeur g ON g.id = v.grandeurId JOIN ligneProduit lp ON lp.id = v.ligneProduitId;", Connection);
                 MySqlDataReader reader;
                 reader = cmd.ExecuteReader();
@@ -262,17 +262,53 @@ namespace VeloMax
 
         private void InsertFournisseur_Click(object sender, RoutedEventArgs e)
         {
-
+            InsertFournisseur insertFournisseur = new InsertFournisseur(Connection);
+            insertFournisseur.ShowDialog();
+            LoadFournisseurs();
         }
 
         private void UpdateFournisseur_Click(object sender, RoutedEventArgs e)
         {
-
+            DataRowView data = FournisseursDataGrid.SelectedItem as DataRowView;
+            int id = Convert.ToInt32(data[0].ToString());
+            string siret = data[1].ToString();
+            string nom = data[2].ToString();
+            string nomContact = data[3].ToString();
+            string prenomContact = data[4].ToString();
+            string mailContact = data[5].ToString();
+            string rue = data[6].ToString();
+            string ville = data[7].ToString();
+            string codePostal = data[8].ToString();
+            string province = data[9].ToString();
+            Int32.TryParse(data[10].ToString(), out int libelle_int);
+            Fournisseur fournisseur = new Fournisseur(id, siret, nom, nomContact, prenomContact, mailContact, rue, ville, codePostal, province, libelle_int);
+            UpdateFournisseur updateFournisseur = new UpdateFournisseur(fournisseur, Connection);
+            updateFournisseur.ShowDialog();
+            LoadFournisseurs();
         }
 
         private void DeleteFournisseur_Click(object sender, RoutedEventArgs e)
         {
-
+            DataRowView data = FournisseursDataGrid.SelectedItem as DataRowView;
+            int id = Convert.ToInt32(data[0].ToString());
+            Connection.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM fournisseur WHERE id={id}", Connection);
+                if (cmd.ExecuteNonQuery() == 0)
+                {
+                    MessageBox.Show("Data not deleted !");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Cette pièce ne peut pas être supprimée !");
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            LoadFournisseurs();
         }
 
         public void LoadCommandes()
@@ -314,7 +350,7 @@ namespace VeloMax
             Connection.Open();
             try
             {
-                string request = "SELECT * FROM piece;";
+                string request = "SELECT * FROM historiqueAbonnement h JOIN client c ON c.id = h.idClient JOIN abonnement a ON h.idAbonnement = a.id;";
                 MySqlCommand cmd = new MySqlCommand(request, Connection);
                 MySqlDataReader reader;
                 reader = cmd.ExecuteReader();

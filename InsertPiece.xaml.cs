@@ -27,7 +27,7 @@ namespace VeloMax
             Connection = connection;
         }
 
-        private void insertPieceBtn_Click(object sender, RoutedEventArgs e)
+        private void InsertPieceBtn_Click(object sender, RoutedEventArgs e)
         {
             Connection.Open();
             try

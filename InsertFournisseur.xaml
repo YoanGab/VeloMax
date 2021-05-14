@@ -1,11 +1,11 @@
-﻿<Window x:Class="VeloMax.UpdateClient"
+﻿<Window x:Class="VeloMax.InsertFournisseur"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-        Title="UpdateClient" Height="480" Width="250" Background="#1e847f">
+        Title="InsertFournisseur" Height="480" Width="250" Background="#1e847f">
     <Border Background="#ECC19C" CornerRadius="20" Margin="10">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -19,12 +19,8 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
-            <TextBlock Text="Client" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" TextAlignment="Center"/>
+            <TextBlock Text="Fournisseur" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" TextAlignment="Center"/>
             <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 15 0 0" >
-                <Grid >
-                    <TextBlock Text="Entreprise" />
-                    <CheckBox x:Name="entrepriseCheckBox" Margin="0 0 25 0" HorizontalAlignment="Right" />
-                </Grid>
                 <Grid Margin="0 10 0 0" >
                     <TextBlock Text="Siret" />
                     <TextBox x:Name="siretTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
@@ -34,16 +30,16 @@
                     <TextBox x:Name="nomTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
                 </Grid>
                 <Grid Margin="0 10 0 0" >
-                    <TextBlock Text="Prénom" />
-                    <TextBox x:Name="prenomTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                    <TextBlock Text="Nom Contact" />
+                    <TextBox x:Name="nomContactTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
                 </Grid>
                 <Grid Margin="0 10 0 0" >
-                    <TextBlock Text="Mail" />
-                    <TextBox x:Name="mailTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                    <TextBlock Text="Prenom Contact" />
+                    <TextBox x:Name="prenomContactTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
                 </Grid>
                 <Grid Margin="0 10 0 0" >
-                    <TextBlock Text="Téléphone" />
-                    <TextBox x:Name="telephoneTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                    <TextBlock Text="Mail Contact" />
+                    <TextBox x:Name="mailContactTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
                 </Grid>
                 <Grid Margin="0 10 0 0" >
                     <TextBlock Text="Rue" />
@@ -62,10 +58,10 @@
                     <TextBox x:Name="provinceTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
                 </Grid>
                 <Grid Margin="0 10 0 0" >
-                    <TextBlock Text="Est Abonné" />
-                    <CheckBox x:Name="estAbonneCheckBox" Margin="0 0 25 0" HorizontalAlignment="Right" />
+                    <TextBlock Text="Libellé" />
+                    <TextBox x:Name="libelleTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
                 </Grid>
-                <Button x:Name="updateClientButton" Content="Mettre à jour" Click="updateClientBtn_Click" Margin="0 20 0 0"/>
+                <Button x:Name="insertFournisseurButton" Content="Ajouter" Click="InsertFournisseurBtn_Click" Margin="0 20 0 0"/>
             </StackPanel>
         </Grid>
     </Border>
