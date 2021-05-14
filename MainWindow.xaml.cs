@@ -86,6 +86,10 @@ namespace VeloMax
         private void DeletePiece_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = PiecesDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                return;
+            }
             int id = Convert.ToInt32(data[0].ToString());
             Connection.Open();
             try
@@ -152,11 +156,17 @@ namespace VeloMax
         private void DeleteVelo_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = VelosDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                return;
+            }
             int id = Convert.ToInt32(data[0].ToString());
             Connection.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"DELETE FROM velo WHERE id={id}", Connection);
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM veloPiece WHERE idVelo={id}", Connection);
+                cmd.ExecuteNonQuery();
+                cmd = new MySqlCommand($"DELETE FROM velo WHERE id={id}", Connection);
                 if (cmd.ExecuteNonQuery() == 0)
                 {
                     MessageBox.Show("Data not deleted !");
@@ -227,6 +237,10 @@ namespace VeloMax
         private void DeleteClient_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = ClientsDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                return;
+            }
             int id = Convert.ToInt32(data[0].ToString());
             Connection.Open();
             try
@@ -296,6 +310,10 @@ namespace VeloMax
         private void DeleteFournisseur_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = FournisseursDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                return;
+            }
             int id = Convert.ToInt32(data[0].ToString());
             Connection.Open();
             try
@@ -348,7 +366,30 @@ namespace VeloMax
 
         private void DeleteCommande_Click(object sender, RoutedEventArgs e)
         {
-
+            DataRowView data = FournisseursDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                return;
+            }
+            int id = Convert.ToInt32(data[0].ToString());
+            Connection.Open();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM commandeVelo WHERE idCommande={id}", Connection);
+                cmd.ExecuteNonQuery();
+                cmd = new MySqlCommand($"DELETE FROM commandePiece WHERE idCommande={id}", Connection);
+                cmd.ExecuteNonQuery();
+                cmd = new MySqlCommand($"DELETE FROM commande WHERE id={id}", Connection);
+            }
+            catch
+            {
+                MessageBox.Show("Cette pièce ne peut pas être supprimée !");
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            LoadFournisseurs();
         }
 
         private void AbonnementExportJson_Click(object sender, RoutedEventArgs e)
