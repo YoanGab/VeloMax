@@ -176,7 +176,13 @@ namespace VeloMax
         public void LoadClients()
         {
             Connection.Open();
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM client c LEFT JOIN abonnement a ON a.Id = c.idAbonnement;", Connection);
+            string request = "SELECT c.*, a.*, SUM(prix) AS totalPrix, SUM(cv.quantite) AS nbVelosAchetes, SUM(cp.quantite) AS nbPiecesAchetes, SUM(cv.quantite) + SUM(cp.quantite) AS nbProduitsAchetes FROM client c " +
+                "LEFT JOIN abonnement a ON a.Id = c.idAbonnement " +
+                "LEFT JOIN commande co ON co.idClient = c.id " +
+                "JOIN commandeVelo cv ON cv.idCommande = co.id " +
+                "JOIN commandePiece cp ON cp.idCommande = co.id " +
+                "GROUP BY c.id;";
+            MySqlCommand cmd = new MySqlCommand(request, Connection);
             MySqlDataReader reader;
             reader = cmd.ExecuteReader();
             DataTable dt = new DataTable();
