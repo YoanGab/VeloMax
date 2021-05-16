@@ -124,8 +124,74 @@
                         <DockPanel Grid.Row="1" Grid.Column="1">
                             <DataGrid Name="CommandesDataGrid" AutoGenerateColumns="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}" />
                         </DockPanel>
-                        <Button x:Name="updateCommande" Content="Update" Grid.Column="2" Grid.Row="1" Margin="20 0 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="UpdateCommande_Click" />
-                        <Button x:Name="deleteCommande" Content="Delete" Grid.Column="2" Grid.Row="1" Margin="20 50 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="DeleteCommande_Click" />
+                        <Button x:Name="detailsCommande" Content="Détails" Grid.Column="2" Grid.Row="1" Margin="20 0 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="DetailsCommande_Click" />
+                        <Button x:Name="updateCommande" Content="Update" Grid.Column="2" Grid.Row="1" Margin="20 50 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="UpdateCommande_Click" />
+                        <Button x:Name="deleteCommande" Content="Delete" Grid.Column="2" Grid.Row="1" Margin="20 100 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="DeleteCommande_Click" />
+                        <Button x:Name="validateCommande" Content="Valider" Grid.Column="2" Grid.Row="1" Margin="20 150 0 0" Height="35" Width="300" VerticalAlignment="Top" Click="ValidateCommande_Click" />
+                    </Grid>
+                </Border>
+            </TabItem>
+
+            <TabItem Header="Analyse des commandes">
+                <Border Background="#ECC19C" CornerRadius="20" Margin="20">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="20" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="1" Grid.Column="1">
+                            <Button Content="Rafraîchir" Margin="20 0 20 20" Click="RafraichirStats_Click" />
+                            <Grid>
+                                <TextBlock  Text="Min des commandes (€)" HorizontalAlignment="Left" />
+                                <TextBlock  Text="Moyenne des commandes (€)" HorizontalAlignment="Center" />
+                                <TextBlock  Text="Max des commandes (€)" HorizontalAlignment="Right" />
+                            </Grid>
+                            <Grid>
+                                <TextBlock x:Name="minCommandeTextBlock" Text="" HorizontalAlignment="Left" Margin="50 0 0 10" />
+                                <TextBlock x:Name="moyenneCommandeTextBlock" Text="" HorizontalAlignment="Center" Margin="0 0 0 10" />
+                                <TextBlock x:Name="maxCommandeTextBlock" Text="" HorizontalAlignment="Right" Margin="0 0 50 10" />
+                            </Grid>
+
+                            <Grid>
+                                <TextBlock  Text="Min de pièces des commandes" HorizontalAlignment="Left" Margin="0 0 0 10" />
+                                <TextBlock  Text="Moyenne de pièces des commandes" HorizontalAlignment="Center" Margin="0 0 0 10" />
+                                <TextBlock  Text="Max de pièces des commandes" HorizontalAlignment="Right" Margin="0 0 0 10" />
+                            </Grid>
+                            <Grid>
+                                <TextBlock x:Name="minPiecesCommandeTextBlock" HorizontalAlignment="Left" Margin="50 0 0 10"  />
+                                <TextBlock x:Name="moyennePiecesCommandeTextBlock" Text="" HorizontalAlignment="Center" Margin="0 0 0 10" />
+                                <TextBlock x:Name="maxPiecesCommandeTextBlock" Text="" HorizontalAlignment="Right" Margin="0 0 50 10" />
+                            </Grid>
+
+                            <Grid>
+                                <TextBlock  Text="Min de vélos des commandes" HorizontalAlignment="Left" Margin="0 0 0 10" />
+                                <TextBlock  Text="Moyenne de vélos des commandes" HorizontalAlignment="Center" Margin="0 0 0 10" />
+                                <TextBlock  Text="Max de vélos des commandes" HorizontalAlignment="Right" Margin="0 0 0 10" />
+                            </Grid>
+                            <Grid>
+                                <TextBlock x:Name="minVelosCommandeTextBlock" Text="" HorizontalAlignment="Left" Margin="50 0 0 10" />
+                                <TextBlock x:Name="moyenneVelosCommandeTextBlock" Text="" HorizontalAlignment="Center" Margin="0 0 0 10" />
+                                <TextBlock x:Name="maxVelosCommandeTextBlock" Text="" HorizontalAlignment="Right" Margin="0 0 50 10" />
+                            </Grid>
+
+                            <Grid>
+                                <TextBlock  Text="Min d'articles des commandes" HorizontalAlignment="Left" Margin="0 10 0 0" />
+                                <TextBlock  Text="Moyenne d'articles des commandes" HorizontalAlignment="Center" Margin="0 10 0 0" />
+                                <TextBlock  Text="Max d'articles des commandes" HorizontalAlignment="Right" Margin="0 10 0 0" />
+                            </Grid>
+                            <Grid>
+                                <TextBlock x:Name="minArticlesCommandeTextBlock" Text="" HorizontalAlignment="Left" Margin="50 0 0 10" />
+                                <TextBlock x:Name="moyenneArticlesCommandeTextBlock" Text="" HorizontalAlignment="Center" Margin="0 0 0 10" />
+                                <TextBlock x:Name="maxArticlesCommandeTextBlock" Text="" HorizontalAlignment="Right" Margin="0 0 50 10" />
+                            </Grid>
+                        </StackPanel>
                     </Grid>
                 </Border>
             </TabItem>

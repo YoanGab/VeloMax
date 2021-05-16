@@ -40,6 +40,7 @@ namespace VeloMax
             LoadClients();
             LoadFournisseurs();
             LoadCommandes();
+            LoadStats();
         }
 
         public void LoadPieces()
@@ -354,6 +355,18 @@ namespace VeloMax
             }
         }
 
+        private void DetailsCommande_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView data = CommandesDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                MessageBox.Show("Sélectionnez un client");
+                return;
+            }
+            int id = Convert.ToInt32(data[0].ToString());
+            DetailsCommande detailsCommande = new DetailsCommande(id, Connection);
+            detailsCommande.ShowDialog();
+        }
         private void InsertCommande_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = ClientsDataGrid.SelectedItem as DataRowView;
@@ -370,15 +383,24 @@ namespace VeloMax
 
         private void UpdateCommande_Click(object sender, RoutedEventArgs e)
         {
-            DataRowView data = FournisseursDataGrid.SelectedItem as DataRowView;
+            DataRowView data = CommandesDataGrid.SelectedItem as DataRowView;
             if (data == null)
             {
+                MessageBox.Show("Selectionnez une ligne");
                 return;
             }
             int id = Convert.ToInt32(data[0].ToString());
             DateTime dateCreation = DateTime.ParseExact(data[1].ToString(), "dd/MM/yyyy HH:mm:ss", null);
-            DateTime dateValidation = DateTime.ParseExact(data[2].ToString(), "dd/MM/yyyy HH:mm:ss", null);
-            DateTime dateExpedition = DateTime.ParseExact(data[3].ToString(), "dd/MM/yyyy HH:mm:ss", null);
+            DateTime dateValidation = new DateTime();
+            if (data[2].ToString() != "")
+            {
+                dateValidation = DateTime.ParseExact(data[2].ToString(), "dd/MM/yyyy HH:mm:ss", null);
+            }
+            DateTime dateExpedition = new DateTime();
+            if (data[3].ToString() != "")
+            {
+                dateExpedition = DateTime.ParseExact(data[3].ToString(), "dd/MM/yyyy HH:mm:ss", null);
+            }
             string rueLivraison = data[4].ToString();
             string villeLivraison = data[5].ToString();
             string codePostalLivraison = data[6].ToString();
@@ -419,6 +441,80 @@ namespace VeloMax
             catch
             {
                 MessageBox.Show("Cette pièce ne peut pas être supprimée !");
+            }
+            finally
+            {
+                Connection.Close();
+            }
+            LoadCommandes();
+        }
+
+        private void ValidateCommande_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView data = CommandesDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                MessageBox.Show("Vous devez selectionner une ligne !");
+                return;
+            }
+            int id = Convert.ToInt32(data[0].ToString());
+            Connection.Open();
+            try
+            {
+                string request = $"SELECT statut FROM commande WHERE id = {id}";
+                MySqlCommand cmd = new MySqlCommand(request, Connection);
+                string statut = cmd.ExecuteScalar().ToString();
+                if (statut == "Validé")
+                {
+                    MessageBox.Show("Cette commande est déjà validé !");
+                    return;
+                }
+
+                request = $"SELECT idPiece, quantite FROM commandePiece WHERE idCommande = {id}";
+                cmd = new MySqlCommand(request, Connection);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                int idPiece;
+                int quantite;
+                List<string> requests = new List<string>();
+                while (reader.Read())
+                {
+                    idPiece = reader.GetInt32(0);
+                    quantite = reader.GetInt32(1);
+
+                    request = $"UPDATE piece SET quantite = quantite - {quantite} WHERE id = {idPiece}";
+                    requests.Add(request);
+                }
+                reader.Dispose();
+
+                request = $"SELECT idVelo, quantite FROM commandeVelo WHERE idCommande = {id}";
+                cmd = new MySqlCommand(request, Connection);
+                reader = cmd.ExecuteReader();
+                int idVelo;
+                
+                
+                while (reader.Read())
+                {
+                    idVelo = reader.GetInt32(0);
+                    quantite = reader.GetInt32(1);
+
+                    request = $"UPDATE velo SET quantite = quantite - {quantite} WHERE id = {idVelo}";
+                    requests.Add(request);
+                }
+                reader.Dispose();
+
+                foreach (string req in requests)
+                {
+                    cmd = new MySqlCommand(req, Connection);
+                    cmd.ExecuteNonQuery();
+                }
+
+                request = $"UPDATE commande SET statut = 'Validé' WHERE id = {id};";
+                cmd = new MySqlCommand(request, Connection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.ToString());
             }
             finally
             {
@@ -483,6 +579,128 @@ namespace VeloMax
             {
                 Connection.Close();
             }
+        }
+
+        public void LoadStats()
+        {
+            Connection.Open();
+            try
+            {
+                string request = "SELECT prix, cv.quantite, cp.quantite, SUM(cv.quantite + cp.quantite) FROM commande c " +
+                    "JOIN commandePiece cp ON c.id = cp.idCommande " +
+                    "JOIN commandeVelo cv ON c.id = cv.idCommande " +
+                    "GROUP BY id;";
+                MySqlCommand cmd = new MySqlCommand(request, Connection);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                List<int> prix = new List<int>();
+                List<int> countVelos = new List<int>();
+                List<int> countPieces = new List<int>();
+                List<int> countArticles = new List<int>();
+
+                while (reader.Read())
+                {
+                    prix.Add(reader.GetInt32(0));
+                    countVelos.Add(reader.GetInt32(1));
+                    countPieces.Add(reader.GetInt32(2));
+                    countArticles.Add(reader.GetInt32(3));
+                }
+                reader.Dispose();
+
+                
+                int minPrix = -1;
+                int sumPrix = 0;
+                int maxPrix = -1;
+
+                int minVelos = -1;
+                int sumVelos = 0;
+                int maxVelos = -1;
+
+                int minPieces = -1;
+                int sumPieces = 0;
+                int maxPieces = -1;
+
+                int minArticles = -1;
+                int sumArticles = 0;
+                int maxArticles = -1;
+                
+                for (int i = 0; i < countPieces.Count(); i++)
+                {
+                    
+                    if (minPrix < 0 | minPrix > prix[i])
+                    {
+                        minPrix = prix[i];
+                    }
+                    if (maxPrix < 0 | maxPrix < prix[i])
+                    {
+                        maxPrix = prix[i];
+                    }
+                    sumPrix += prix[i];
+
+                    if (minVelos < 0 | minVelos> countVelos[i])
+                    {
+                        minVelos= countVelos[i];
+                    }
+                    if (maxVelos< 0 | maxVelos < countVelos[i])
+                    {
+                        maxVelos = countVelos[i];
+                    }
+                    sumVelos += countVelos[i];
+
+                    if (minPieces < 0 | minPieces > countPieces[i])
+                    {
+                        minPieces = countPieces[i];
+                    }
+                    if (maxPieces < 0 | maxPieces < countPieces[i])
+                    {
+                        maxPieces = countPieces[i];
+                    }
+                    sumPieces += countPieces[i];
+
+                    if (minArticles < 0 | minArticles > countArticles[i])
+                    {
+                        minArticles = countArticles[i];
+                    }
+                    if (maxArticles < 0 | maxArticles < countArticles[i])
+                    {
+                        maxArticles = countArticles[i];
+                    }
+                    sumArticles += countArticles[i];
+                }
+                int meanPrix = Convert.ToInt32(sumPrix / prix.Count());
+                int meanVelos = Convert.ToInt32(sumVelos / countVelos.Count());
+                int meanPieces = Convert.ToInt32(sumPieces / countPieces.Count());
+                int meanArticles = Convert.ToInt32(sumArticles/ countArticles.Count());
+
+                minCommandeTextBlock.Text = minPrix.ToString();
+                moyenneCommandeTextBlock.Text = meanPrix.ToString();
+                maxCommandeTextBlock.Text = maxPrix.ToString();
+
+                minPiecesCommandeTextBlock.Text = minPieces.ToString();
+                moyennePiecesCommandeTextBlock.Text = meanPieces.ToString();
+                maxPiecesCommandeTextBlock.Text = maxPieces.ToString();
+
+                minVelosCommandeTextBlock.Text = minVelos.ToString();
+                moyenneVelosCommandeTextBlock.Text = meanVelos.ToString();
+                maxVelosCommandeTextBlock.Text = maxVelos.ToString();
+
+                minArticlesCommandeTextBlock.Text = minArticles.ToString();
+                moyenneArticlesCommandeTextBlock.Text = meanArticles.ToString();
+                maxArticlesCommandeTextBlock.Text = maxArticles.ToString();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.ToString());
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
+        private void RafraichirStats_Click(object sender, RoutedEventArgs e)
+        {
+            LoadStats();
         }
     }
 }

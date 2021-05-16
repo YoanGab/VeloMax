@@ -5,8 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-        Title="UpdateCommande" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="UpdateCommande" Height="400" Width="250" Background="#1e847f">
+    <Border Background="#ECC19C" CornerRadius="20" Margin="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Commande" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" TextAlignment="Center"/>
+            <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 15 0 0" >
+                <Grid Margin="0 10 0 0" >
+                    <TextBlock Text="Date Commande" />
+                    <TextBox x:Name="dateCommandeTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                </Grid>
+                <Grid Margin="0 10 0 0" >
+                    <TextBlock Text="Date Validation" />
+                    <TextBox x:Name="dateValidationTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                </Grid>
+                <Grid Margin="0 10 0 0" >
+                    <TextBlock Text="Date Expédition" />
+                    <TextBox x:Name="dateExpeditionTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                </Grid>
+                <Grid Margin="0 10 0 0" >
+                    <TextBlock Text="Rue" />
+                    <TextBox x:Name="rueLivraisonTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                </Grid>
+                <Grid Margin="0 10 0 0" >
+                    <TextBlock Text="Ville" />
+                    <TextBox x:Name="villeLivraisonTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                </Grid>
+                <Grid Margin="0 10 0 0" >
+                    <TextBlock Text="Code Postal" />
+                    <TextBox x:Name="codePostalLivraisonTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                </Grid>
+                <Grid Margin="0 10 0 0" >
+                    <TextBlock Text="Province" />
+                    <TextBox x:Name="provinceLivraisonTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                </Grid>
+                <Grid Margin="0 10 0 0" >
+                    <TextBlock Text="Statut" />
+                    <TextBox x:Name="statutTextBox" Margin="0 0 10 0" HorizontalAlignment="Right" MinWidth="50" />
+                </Grid>
+                <Button x:Name="updateCommandeButton" Content="Ajouter" Click="UpdateCommandeBtn_Click" Margin="0 20 0 0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

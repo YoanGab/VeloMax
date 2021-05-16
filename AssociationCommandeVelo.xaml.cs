@@ -55,6 +55,11 @@ namespace VeloMax
             try
             {
                 DataRowView data = AssociationCommandeVeloDataGrid.SelectedItem as DataRowView;
+                if (data == null)
+                {
+                    MessageBox.Show("Sélectionnez une ligne");
+                    return;
+                }
                 int idVelo = Convert.ToInt32(data[0].ToString());
                 int quantite = Convert.ToInt32(quantiteTextBox.Text);
                 string request = $"INSERT INTO commandeVelo (idCommande, idVelo, quantite) VALUES ({IdCommande}, {idVelo}, {quantite});";

@@ -36,7 +36,7 @@ namespace VeloMax
             Connection.Open();
             try
             {
-                MySqlCommand cmd = new MySqlCommand($"SELECT v.*, cv.quantite AS quantitePanier FROM velo v JOIN commandeVelo cv ON cv.idCommande = v.id WHERE idCommande = {IdCommande};", Connection);
+                MySqlCommand cmd = new MySqlCommand($"SELECT v.*, cv.quantite AS quantitePanier FROM velo v JOIN commandeVelo cv ON cv.idVelo = v.id WHERE idCommande = {IdCommande};", Connection);
                 MySqlDataReader reader;
                 reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();

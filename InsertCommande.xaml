@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeloMax"
         mc:Ignorable="d"
-        Title="InsertCommande" Height="390" Width="250" Background="#1e847f">
+        Title="InsertCommande" Height="400" Width="250" Background="#1e847f">
     <Border Background="#ECC19C" CornerRadius="20" Margin="10">
         <Grid>
             <Grid.ColumnDefinitions>
