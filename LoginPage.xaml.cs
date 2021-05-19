@@ -40,9 +40,10 @@ namespace VeloMax
                 dashboard.Show();
                 this.Close();
             }
-            catch
+            catch(Exception exc )
             {
-                MessageBox.Show("Username or password is incorrect.");
+                MessageBox.Show(exc.ToString());
+                //MessageBox.Show("Username or password is incorrect.");
                 txtUsername.Text = "";
                 txtPassword.Password = "";
                 connection.Close();

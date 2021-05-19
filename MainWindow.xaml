@@ -215,14 +215,7 @@
                             <Button x:Name="ExportJson" Content="Export Json des abonnements" Click="AbonnementExportJson_Click" />
                             <Button x:Name="ExportXML" Content="Export XML des stocks" Click="StockExportXML_Click" Margin="0 10 0 0"/>
                         </StackPanel>
-                        <ScrollViewer HorizontalScrollBarVisibility="Visible" Grid.Row="2" Grid.Column="1" Margin="0 10 0 0" >
-                            <StackPanel>
-                                <TextBox Text="Export JSON" />
-                                <TextBlock x:Name="JSONExport" Text="{Binding}" />
-                                <TextBox Text="Export XML" />
-                                <TextBlock x:Name="XMLExport" Text="{Binding}" />
-                            </StackPanel>
-                        </ScrollViewer>
+                        
                     </Grid>
                 </Border>
             </TabItem>

@@ -16,7 +16,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
+using System.IO;
 using Newtonsoft.Json;
+using System.Xml;
 
 namespace VeloMax
 {
@@ -534,9 +536,15 @@ namespace VeloMax
                 reader = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
                 dt.Load(reader);
+
+                string json = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+                System.IO.File.WriteAllText("BDD_JSON.json", json);
+                /*
                 string JSONString = string.Empty;
-                JSONString = JsonConvert.SerializeObject(dt, Formatting.Indented);
-                JSONExport.Text = JSONString;
+                JSONString = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+                JSONExport.Text = JSONString;*/
+
+
             }
             catch (Exception exc)
             {
@@ -567,9 +575,22 @@ namespace VeloMax
                 reader = cmd.ExecuteReader();
                 DataTable dtPiece = new DataTable();
                 dtPiece.Load(reader);
+                
+                dtPiece.WriteXml("BDD_XML.xml");
+
+
+                /*
                 dtPiece.WriteXml(writer, XmlWriteMode.WriteSchema, true);
                 string dtxml = writer.ToString();
                 XMLExport.Text = dtxml;
+
+                XmlDocument docXml = new XmlDocument();
+                XmlElement veloRequest = docXml.CreateElement("SELECT * FROM velo WHERE quantite < 2;");
+                docXml.AppendChild(veloRequest);
+                XmlElement pieceRequest = docXml.CreateElement("SELECT * FROM piece WHERE quantite < 2;");
+                docXml.AppendChild(pieceRequest);*/
+                //docXml.Save("BDD_XML.xml");
+
             }
             catch (Exception exc)
             {

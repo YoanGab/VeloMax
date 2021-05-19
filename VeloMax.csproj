@@ -106,7 +106,6 @@
     <Compile Include="InsertVelo.xaml.cs">
       <DependentUpon>InsertVelo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Type.cs" />
     <Compile Include="UpdateClient.xaml.cs">
       <DependentUpon>UpdateClient.xaml</DependentUpon>
     </Compile>
@@ -123,7 +122,6 @@
       <DependentUpon>UpdateVelo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Velo.cs" />
-    <Compile Include="VeloPiece.cs" />
     <Page Include="AssociateFournisseurPiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,20 +190,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Abonnement.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Client.cs" />
     <Compile Include="Commande.cs" />
-    <Compile Include="CommandePiece.cs" />
-    <Compile Include="CommandeVelo.cs" />
     <Compile Include="Fournisseur.cs" />
-    <Compile Include="FournisseurPiece.cs" />
-    <Compile Include="Grandeur.cs" />
-    <Compile Include="HistoriqueAbonnement.cs" />
-    <Compile Include="LigneProduit.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -236,7 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Piece.cs" />
-    <Compile Include="ProgrammeFidelio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
