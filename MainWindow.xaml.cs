@@ -530,7 +530,7 @@ namespace VeloMax
                     cmd.ExecuteNonQuery();
                 }
 
-                request = $"UPDATE commande SET statut = 'Validé' WHERE id = {id};";
+                request = $"UPDATE commande SET statut = 'Validé', dateValidation = CURRENT_TIMESTAMP WHERE id = {id};";
                 cmd = new MySqlCommand(request, Connection);
                 cmd.ExecuteNonQuery();
             }
