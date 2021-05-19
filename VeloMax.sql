@@ -194,7 +194,7 @@ ADD
   
 use Velomax;
 
--- Velo Piece VeloPiece ProgrammeFidelio Grandeur Type LigneProduit Abonnement Client Commande CommandePiece CommandeVelo Fournisseur FournisseurPiece HistoriqueAbonnement
+-- Velo Piece VeloPiece ProgrammeFidelio Grandeur Type LigneProduit Abonnement Client Commande CommandePiece commandeVelo Fournisseur fournisseurPiece historiqueAbonnement
 -- ProgrammeFideliio
 INSERT INTO
   `programmeFidelio` (`description`, `prix`, `duree`, `rabais`)
@@ -2380,7 +2380,7 @@ VALUES
 );
 
 INSERT INTO
-`commandevelo`(
+`commandeVelo`(
   `idCommande`,
   `idVelo`,
   `quantite`
@@ -2393,7 +2393,7 @@ VALUES
 );
 
 INSERT INTO
-`commandevelo`(
+`commandeVelo`(
   `idCommande`,
   `idVelo`,
   `quantite`
@@ -2406,7 +2406,7 @@ VALUES
 );
 
 INSERT INTO
-`commandevelo`(
+`commandeVelo`(
   `idCommande`,
   `idVelo`,
   `quantite`
@@ -2419,7 +2419,7 @@ VALUES
 );
 
 INSERT INTO
-`commandevelo`(
+`commandeVelo`(
   `idCommande`,
   `idVelo`,
   `quantite`
@@ -2432,7 +2432,7 @@ VALUES
 );
 
 INSERT INTO
-`commandevelo`(
+`commandeVelo`(
   `idCommande`,
   `idVelo`,
   `quantite`
@@ -2528,7 +2528,7 @@ VALUES
 
 -- fournisseur pièce
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2545,7 +2545,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2562,7 +2562,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2579,7 +2579,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2596,7 +2596,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2613,7 +2613,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2630,7 +2630,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2647,7 +2647,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2664,7 +2664,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2681,7 +2681,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2698,7 +2698,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2715,7 +2715,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2732,7 +2732,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurpiece`(
+`fournisseurPiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2750,7 +2750,7 @@ VALUES
 
 -- historique abonnement
 INSERT INTO
-`historiqueabonnement`(
+`historiqueAbonnement`(
   `idClient`,
   `idAbonnement`
 )
@@ -2761,7 +2761,7 @@ VALUES
 );
 
 INSERT INTO
-`historiqueabonnement`(
+`historiqueAbonnement`(
   `idClient`,
   `idAbonnement`
 )
@@ -2772,7 +2772,7 @@ VALUES
 );
 
 INSERT INTO
-`historiqueabonnement`(
+`historiqueAbonnement`(
   `idClient`,
   `idAbonnement`
 )
@@ -2783,7 +2783,7 @@ VALUES
 );
 
 INSERT INTO
-`historiqueabonnement`(
+`historiqueAbonnement`(
   `idClient`,
   `idAbonnement`
 )
@@ -2794,7 +2794,7 @@ VALUES
 );
 
 INSERT INTO
-`historiqueabonnement`(
+`historiqueAbonnement`(
   `idClient`,
   `idAbonnement`
 )
@@ -2805,7 +2805,7 @@ VALUES
 );
 
 INSERT INTO
-`historiqueabonnement`(
+`historiqueAbonnement`(
   `idClient`,
   `idAbonnement`
 )
