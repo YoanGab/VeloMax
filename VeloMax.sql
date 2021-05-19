@@ -1,7 +1,7 @@
 drop database if exists Velomax;
 CREATE DATABASE if not exists Velomax;
-use Velomax;
 
+use Velomax;
 CREATE TABLE `ligneProduit` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `nom` varchar(255) UNIQUE NOT NULL
@@ -192,7 +192,10 @@ ALTER TABLE
 ADD
   CONSTRAINT UNIQUE_REFERENCE UNIQUE(`reference`, `typeId`);
   
-  
+use Velomax;
+
+-- Velo Piece VeloPiece ProgrammeFidelio Grandeur Type LigneProduit Abonnement Client Commande CommandePiece CommandeVelo Fournisseur FournisseurPiece HistoriqueAbonnement
+-- ProgrammeFideliio
 INSERT INTO
   `programmeFidelio` (`description`, `prix`, `duree`, `rabais`)
 VALUES
@@ -304,6 +307,9 @@ INSERT INTO
   `type` (`nom`)
 VALUES
   ('Panier');
+  
+  
+  
 -- Velo
 INSERT INTO
   `velo` (
@@ -320,10 +326,10 @@ VALUES
     'Kilimandjaro',
     569,
     CURRENT_TIMESTAMP,
-    null,
+    '2022-05-05',
     1,
     1,
-    0
+    3
   );
 INSERT INTO
   `velo` (
@@ -340,10 +346,10 @@ VALUES
     'NorthPole',
     329,
     CURRENT_TIMESTAMP,
-    null,
+    '2021-10-07',
     1,
     1,
-    0
+    7
   );
 INSERT INTO
   `velo` (
@@ -360,10 +366,10 @@ VALUES
     'MontBlanc',
     399,
     CURRENT_TIMESTAMP,
-    null,
+    '2021-11-11',
     2,
     1,
-    0
+    4
   );
 INSERT INTO
   `velo` (
@@ -380,10 +386,10 @@ VALUES
     'Hooligan',
     199,
     CURRENT_TIMESTAMP,
-    null,
+    '2021-09-20',
     2,
     1,
-    0
+    4
   );
 INSERT INTO
   `velo` (
@@ -396,7 +402,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('Orléans', 229, CURRENT_TIMESTAMP, null, 3, 2, 0);
+  ('Orléans', 229, CURRENT_TIMESTAMP, '2022-10-02', 3, 2, 0);
 INSERT INTO
   `velo` (
     `nom`,
@@ -408,7 +414,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('Orléans', 229, CURRENT_TIMESTAMP, null, 4, 2, 0);
+  ('Orléans', 229, CURRENT_TIMESTAMP, '2024-01-01', 4, 2, 5);
 INSERT INTO
   `velo` (
     `nom`,
@@ -420,7 +426,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('BlueJay', 349, CURRENT_TIMESTAMP, null, 3, 2, 0);
+  ('BlueJay', 349, CURRENT_TIMESTAMP, '2022-12-07', 3, 2, 3);
 INSERT INTO
   `velo` (
     `nom`,
@@ -432,7 +438,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('BlueJay', 349, CURRENT_TIMESTAMP, null, 4, 2, 0);
+  ('BlueJay', 349, CURRENT_TIMESTAMP, '2022-02-01', 4, 2, 1);
 INSERT INTO
   `velo` (
     `nom`,
@@ -448,10 +454,10 @@ VALUES
     'Trail Explorer',
     129,
     CURRENT_TIMESTAMP,
-    null,
+    '2021-10-12',
     5,
     3,
-    0
+    3
   );
 INSERT INTO
   `velo` (
@@ -468,10 +474,10 @@ VALUES
     'Trail Explorer',
     129,
     CURRENT_TIMESTAMP,
-    null,
+    '2022-01-12',
     6,
     3,
-    0
+    5
   );
 INSERT INTO
   `velo` (
@@ -488,10 +494,10 @@ VALUES
     'Night Hawk',
     189,
     CURRENT_TIMESTAMP,
-    null,
+    '2021-10-09',
     2,
     3,
-    0
+    2
   );
 INSERT INTO
   `velo` (
@@ -508,10 +514,10 @@ VALUES
     'Tierra Verde',
     199,
     CURRENT_TIMESTAMP,
-    null,
+    '2022-10-02',
     3,
     3,
-    0
+    4
   );
 INSERT INTO
   `velo` (
@@ -528,10 +534,10 @@ VALUES
     'Tierra Verde',
     199,
     CURRENT_TIMESTAMP,
-    null,
+    '2023-11-01',
     4,
     3,
-    0
+    5
   );
 INSERT INTO
   `velo` (
@@ -548,10 +554,10 @@ VALUES
     'Mud Zinger I',
     279,
     CURRENT_TIMESTAMP,
-    null,
+    '2021-10-12',
     2,
     4,
-    0
+    3
   );
 INSERT INTO
   `velo` (
@@ -568,10 +574,10 @@ VALUES
     'Mud Zinger II',
     359,
     CURRENT_TIMESTAMP,
-    null,
+    '2022-10-09',
     1,
     4,
-    0
+    3
   );
 -- Piece
 INSERT INTO
@@ -585,7 +591,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C32', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C32', 'Cadre Kilimandjaro', 25, CURRENT_TIMESTAMP, '2022-10-30', 1, 7);
 INSERT INTO
   `piece` (
     `reference`,
@@ -597,7 +603,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C34', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C34', 'Cadre NorthPole', 25, CURRENT_TIMESTAMP, '2021-11-12', 1, 8);
 INSERT INTO
   `piece` (
     `reference`,
@@ -609,7 +615,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C76', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C76', 'Cadre MontBlanc', 24, CURRENT_TIMESTAMP, '2022-09-25', 1, 16);
 INSERT INTO
   `piece` (
     `reference`,
@@ -621,7 +627,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C43', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C43', 'Cadre Bluelay', 27, CURRENT_TIMESTAMP, '2022-01-02', 1, 9);
 INSERT INTO
   `piece` (
     `reference`,
@@ -633,7 +639,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C44f', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C44f', 'Cadre Orléans', 24, CURRENT_TIMESTAMP, '2022-12-10', 1, 11);
 INSERT INTO
   `piece` (
     `reference`,
@@ -645,7 +651,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C43f', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C43f', 'Cadre Bluelay', 25, CURRENT_TIMESTAMP, '2021-10-02', 1, 3);
 INSERT INTO
   `piece` (
     `reference`,
@@ -657,7 +663,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C01', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C01', 'Cadre Trail Explorer', 24, CURRENT_TIMESTAMP,'2022-03-03', 1, 17);
 INSERT INTO
   `piece` (
     `reference`,
@@ -669,7 +675,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C02', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C02', 'Cadre Trail Explorer', 22, CURRENT_TIMESTAMP, '2021-11-25', 1, 14);
 INSERT INTO
   `piece` (
     `reference`,
@@ -681,7 +687,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C15', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C15', 'Cadre Night Hawk', 23, CURRENT_TIMESTAMP, '2022-10-12', 1, 0);
 INSERT INTO
   `piece` (
     `reference`,
@@ -693,7 +699,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C87', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C87', 'Cadre Tierra Verde', 21, CURRENT_TIMESTAMP, '2022-10-02', 1, 1);
 INSERT INTO
   `piece` (
     `reference`,
@@ -705,7 +711,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C87f', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C87f', 'Cadre Tierra Verde', 23, CURRENT_TIMESTAMP, '2021-10-09', 1, 4);
 INSERT INTO
   `piece` (
     `reference`,
@@ -717,7 +723,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C25', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C25', 'Cadre Mud Zinger I', 25, CURRENT_TIMESTAMP, '2023-01-02', 1, 5);
 INSERT INTO
   `piece` (
     `reference`,
@@ -729,7 +735,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('C26', '', 10, CURRENT_TIMESTAMP, null, 1, 0);
+  ('C26', 'Cadre Mud Zinger II', 26, CURRENT_TIMESTAMP, '2022-05-01', 1, 5);
 INSERT INTO
   `piece` (
     `reference`,
@@ -741,7 +747,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('G7', '', 10, CURRENT_TIMESTAMP, null, 2, 0);
+  ('G7', 'Guidon Kilimandjaro', 15, CURRENT_TIMESTAMP, '2022-05-22', 2, 12);
 INSERT INTO
   `piece` (
     `reference`,
@@ -753,7 +759,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('G9', '', 10, CURRENT_TIMESTAMP, null, 2, 0);
+  ('G9', 'Guidon North Pole', 15, CURRENT_TIMESTAMP, '2021-10-13', 2, 18);
 INSERT INTO
   `piece` (
     `reference`,
@@ -765,7 +771,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('G12', '', 10, CURRENT_TIMESTAMP, null, 2, 0);
+  ('G12', 'Guidon Trail Explorer', 18, CURRENT_TIMESTAMP, '2021-12-31', 2, 4);
 INSERT INTO
   `piece` (
     `reference`,
@@ -777,7 +783,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('F3', '', 10, CURRENT_TIMESTAMP, null, 3, 0);
+  ('F3', 'Freins North Pole', 12, CURRENT_TIMESTAMP, '2023-02-12', 3, 24);
 INSERT INTO
   `piece` (
     `reference`,
@@ -789,7 +795,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('F9', '', 10, CURRENT_TIMESTAMP, null, 3, 0);
+  ('F9', 'Freins Orléans', 15, CURRENT_TIMESTAMP, '2022-07-05', 3, 22);
 INSERT INTO
   `piece` (
     `reference`,
@@ -801,7 +807,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S88', '', 10, CURRENT_TIMESTAMP, null, 4, 0);
+  ('S88', 'Selle Kilimandjaro', 20, CURRENT_TIMESTAMP, '2022-11-02', 4, 15);
 INSERT INTO
   `piece` (
     `reference`,
@@ -813,7 +819,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S37', '', 10, CURRENT_TIMESTAMP, null, 4, 0);
+  ('S37', 'Selle Orléans', 19, CURRENT_TIMESTAMP, '2022-05-01', 4, 9);
 INSERT INTO
   `piece` (
     `reference`,
@@ -825,7 +831,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S35', '', 10, CURRENT_TIMESTAMP, null, 4, 0);
+  ('S35', 'Selle Bluejay', 19, CURRENT_TIMESTAMP, '2021-06-07', 4, 10);
 INSERT INTO
   `piece` (
     `reference`,
@@ -837,7 +843,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S02', '', 10, CURRENT_TIMESTAMP, null, 4, 0);
+  ('S02', 'Selle Trail Explorer', 22, CURRENT_TIMESTAMP, '2021-08-22', 4, 12);
 INSERT INTO
   `piece` (
     `reference`,
@@ -849,7 +855,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S03', '', 10, CURRENT_TIMESTAMP, null, 4, 0);
+  ('S03', 'Selle Trail Explorer', 20, CURRENT_TIMESTAMP, '2022-10-02', 4, 14);
 INSERT INTO
   `piece` (
     `reference`,
@@ -861,7 +867,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S36', '', 10, CURRENT_TIMESTAMP, null, 4, 0);
+  ('S36', 'Selle Tierra Verde', 17, CURRENT_TIMESTAMP, '2022-10-02', 4, 17);
 INSERT INTO
   `piece` (
     `reference`,
@@ -873,7 +879,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S34', '', 10, CURRENT_TIMESTAMP, null, 4, 0);
+  ('S34', 'Selle Tierra Verde', 26, CURRENT_TIMESTAMP, '2022-10-02', 4, 2);
 INSERT INTO
   `piece` (
     `reference`,
@@ -885,7 +891,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S87', '', 10, CURRENT_TIMESTAMP, null, 4, 0);
+  ('S87', 'Selle Mud Zinger II', 18, CURRENT_TIMESTAMP, '2022-10-02', 4, 10);
 INSERT INTO
   `piece` (
     `reference`,
@@ -897,7 +903,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DV133', '', 10, CURRENT_TIMESTAMP, null, 5, 0);
+  ('DV133', 'Dérailleur Avant Mud Zinger II', 8, CURRENT_TIMESTAMP, '2022-10-02', 5, 4);
 INSERT INTO
   `piece` (
     `reference`,
@@ -909,7 +915,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DV17', '', 10, CURRENT_TIMESTAMP, null, 5, 0);
+  ('DV17', 'Dérailleur Avant NorthPole', 5, CURRENT_TIMESTAMP, '2022-10-02', 5, 10);
 INSERT INTO
   `piece` (
     `reference`,
@@ -921,7 +927,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DV87', '', 10, CURRENT_TIMESTAMP, null, 5, 0);
+  ('DV87', 'Dérailleur Avant Hooligan', 10, CURRENT_TIMESTAMP, '2022-10-02', 5, 2);
 INSERT INTO
   `piece` (
     `reference`,
@@ -933,7 +939,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DV57', '', 10, CURRENT_TIMESTAMP, null, 5, 0);
+  ('DV57', 'Dérailleur Avant Bluelay', 10, CURRENT_TIMESTAMP, '2022-10-02', 5, 7);
 INSERT INTO
   `piece` (
     `reference`,
@@ -945,7 +951,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DV15', '', 10, CURRENT_TIMESTAMP, null, 5, 0);
+  ('DV15', 'Dérailleur Avant Night Hawk', 8, CURRENT_TIMESTAMP, '2022-10-02', 5, 10);
 INSERT INTO
   `piece` (
     `reference`,
@@ -957,7 +963,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DV41', '', 10, CURRENT_TIMESTAMP, null, 5, 0);
+  ('DV41', 'Dérailleur Avant Tierra Verde', 10, CURRENT_TIMESTAMP, '2022-10-02', 5, 9);
 INSERT INTO
   `piece` (
     `reference`,
@@ -969,7 +975,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DV132', '', 10, CURRENT_TIMESTAMP, null, 5, 0);
+  ('DV132', 'Dérailleur Avant Mud Zinger I', 7, CURRENT_TIMESTAMP, '2022-10-02', 5, 5);
 INSERT INTO
   `piece` (
     `reference`,
@@ -981,7 +987,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DR56', '', 10, CURRENT_TIMESTAMP, null, 6, 0);
+  ('DR56', 'Dérailleur Arrière Kilimandjaro', 9, CURRENT_TIMESTAMP, '2022-10-02', 6, 16);
 INSERT INTO
   `piece` (
     `reference`,
@@ -993,7 +999,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DR87', '', 10, CURRENT_TIMESTAMP, null, 6, 0);
+  ('DR87', 'Dérailleur Arrière North Pole', 10, CURRENT_TIMESTAMP, '2022-10-02', 6, 15);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1005,7 +1011,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DR86', '', 10, CURRENT_TIMESTAMP, null, 6, 0);
+  ('DR86', 'Dérailleur Arrière Hooligan', 10, CURRENT_TIMESTAMP, '2022-10-02', 6, 18);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1017,7 +1023,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DR23', '', 10, CURRENT_TIMESTAMP, null, 6, 0);
+  ('DR23', 'Dérailleur Arrière Night Hawk', 10, CURRENT_TIMESTAMP, '2022-10-02', 6, 12);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1029,7 +1035,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DR76', '', 10, CURRENT_TIMESTAMP, null, 6, 0);
+  ('DR76', 'Dérailleur Arrière Tierra Verde', 6, CURRENT_TIMESTAMP, '2022-10-02', 6, 11);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1041,7 +1047,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('DR52', '', 10, CURRENT_TIMESTAMP, null, 6, 0);
+  ('DR52', 'Dérailleur Arrière Mud Zinger I', 12, CURRENT_TIMESTAMP, '2022-10-02', 6, 15);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1053,7 +1059,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R45', '', 10, CURRENT_TIMESTAMP, null, 7, 0);
+  ('R45', 'Roue Avant Kilimandjaro', 22, CURRENT_TIMESTAMP, '2022-10-02', 7, 31);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1065,7 +1071,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R48', '', 10, CURRENT_TIMESTAMP, null, 7, 0);
+  ('R48', 'Roue Avant MontBlanc', 21, CURRENT_TIMESTAMP, '2022-10-02', 7, 28);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1077,7 +1083,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R12', '', 10, CURRENT_TIMESTAMP, null, 7, 0);
+  ('R12', 'Roue Avant Hooligan', 22, CURRENT_TIMESTAMP, '2022-10-02', 7, 25);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1089,7 +1095,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R19', '', 10, CURRENT_TIMESTAMP, null, 7, 0);
+  ('R19', 'Roue Avant Orléans', 24, CURRENT_TIMESTAMP, '2022-10-02', 7, 28);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1101,7 +1107,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R1', '', 10, CURRENT_TIMESTAMP, null, 7, 0);
+  ('R1', 'Roue Avant Trail Explorer', 20, CURRENT_TIMESTAMP, '2022-10-02', 7, 32);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1113,7 +1119,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R11', '', 10, CURRENT_TIMESTAMP, null, 7, 0);
+  ('R11', 'Roue Avant Night Hawk', 23, CURRENT_TIMESTAMP, '2022-10-02', 7, 21);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1125,7 +1131,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R44', '', 10, CURRENT_TIMESTAMP, null, 7, 0);
+  ('R44', 'Roue Avant Mud Zinger II', 21, CURRENT_TIMESTAMP, '2022-10-02', 7, 30);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1137,7 +1143,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R46', '', 10, CURRENT_TIMESTAMP, null, 8, 0);
+  ('R46', 'Roue Arrière Kilimandjaro', 20, CURRENT_TIMESTAMP, '2022-10-02', 8, 30);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1149,7 +1155,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R47', '', 10, CURRENT_TIMESTAMP, null, 8, 0);
+  ('R47', 'Roue Arrière North Pole', 22, CURRENT_TIMESTAMP, '2022-10-02', 8, 30);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1161,7 +1167,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R32', '', 10, CURRENT_TIMESTAMP, null, 8, 0);
+  ('R32', 'Roue Arrière Hooligan', 24, CURRENT_TIMESTAMP, '2022-10-02', 8, 29);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1173,7 +1179,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R18', '', 10, CURRENT_TIMESTAMP, null, 8, 0);
+  ('R18', 'Roue Arrière Orléans', 19, CURRENT_TIMESTAMP, '2022-10-02', 8, 25);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1185,7 +1191,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R2', '', 10, CURRENT_TIMESTAMP, null, 8, 0);
+  ('R2', 'Roue Arrière Trail Explorer', 24, CURRENT_TIMESTAMP, '2022-10-02', 8, 31);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1197,7 +1203,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R12', '', 10, CURRENT_TIMESTAMP, null, 8, 0);
+  ('R12', 'Roue Arrière Tierra Verde', 20, CURRENT_TIMESTAMP, '2022-10-02', 8, 31);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1209,7 +1215,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R02', '', 10, CURRENT_TIMESTAMP, null, 9, 0);
+  ('R02', 'Réflecteurs Orléans', 11, CURRENT_TIMESTAMP, '2022-10-02', 9, 8);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1221,7 +1227,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R09', '', 10, CURRENT_TIMESTAMP, null, 9, 0);
+  ('R09', 'Réflecteurs Trail Explorer', 10, CURRENT_TIMESTAMP, '2022-10-02', 9, 10);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1233,7 +1239,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('R10', '', 10, CURRENT_TIMESTAMP, null, 9, 0);
+  ('R10', 'Réflecteurs Tierra Verde', 10, CURRENT_TIMESTAMP, '2022-10-02', 9, 4);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1245,7 +1251,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('P12', '', 10, CURRENT_TIMESTAMP, null, 10, 0);
+  ('P12', 'Pédalier kilimandjaro', 14, CURRENT_TIMESTAMP, '2022-10-02', 10, 23);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1257,7 +1263,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('P34', '', 10, CURRENT_TIMESTAMP, null, 10, 0);
+  ('P34', 'Pédalier Bluelay', 13, CURRENT_TIMESTAMP, '2022-10-02', 10, 25);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1269,7 +1275,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('P1', '', 10, CURRENT_TIMESTAMP, null, 10, 0);
+  ('P1', 'Pédalier Trail Explorer', 12, CURRENT_TIMESTAMP, '2022-10-02', 10, 18);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1281,7 +1287,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('P15', '', 10, CURRENT_TIMESTAMP, null, 10, 0);
+  ('P15', 'Pédalier Night Hawk', 12, CURRENT_TIMESTAMP, '2022-10-02', 10, 24);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1293,7 +1299,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('O2', '', 10, CURRENT_TIMESTAMP, null, 11, 0);
+  ('O2', 'Ordinateur MontBlanc', 41, CURRENT_TIMESTAMP, '2022-10-02', 11, 1);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1305,7 +1311,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('O4', '', 10, CURRENT_TIMESTAMP, null, 11, 0);
+  ('O4', 'Ordinateur Bluelay', 38, CURRENT_TIMESTAMP, '2022-10-02', 11, 3);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1317,7 +1323,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S01', '', 10, CURRENT_TIMESTAMP, null, 12, 0);
+  ('S01', 'Panier Trail Explorer', 10, CURRENT_TIMESTAMP, '2022-10-02', 12, 2);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1329,7 +1335,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S05', '', 10, CURRENT_TIMESTAMP, null, 12, 0);
+  ('S05', 'Panier Trail Explorer', 10, CURRENT_TIMESTAMP, '2022-10-02', 12, 4);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1341,7 +1347,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S74', '', 10, CURRENT_TIMESTAMP, null, 12, 0);
+  ('S74', 'Panier Night Hawk', 9, CURRENT_TIMESTAMP, '2022-10-02', 12, 4);
 INSERT INTO
   `piece` (
     `reference`,
@@ -1353,7 +1359,7 @@ INSERT INTO
     `quantite`
   )
 VALUES
-  ('S73', '', 10, CURRENT_TIMESTAMP, null, 12, 0);
+  ('S73', 'Panier Tierra Verde', 12, CURRENT_TIMESTAMP, '2022-10-02', 12, 3);
 
 
 -- VeloPiece
@@ -2014,6 +2020,46 @@ VALUES
     '2021-05-07 :00:00:00',
     '2022-05-07 :00:00:00'
   );
+  
+INSERT INTO
+  `abonnement` (
+    `idProgramme`,
+    `dateDebut`,
+    `dateFin`
+  )
+VALUES
+  (
+    1,
+    '2020-01-02 :00:00:00',
+    '2021-01-02 :00:00:00'
+  );
+  
+  INSERT INTO
+  `abonnement` (
+    `idProgramme`,
+    `dateDebut`,
+    `dateFin`
+  )
+VALUES
+  (
+    3,
+    '2018-05-12 :00:00:00',
+    '2020-05-12 :00:00:00'
+  );
+  
+  INSERT INTO
+  `abonnement` (
+    `idProgramme`,
+    `dateDebut`,
+    `dateFin`
+  )
+VALUES
+  (
+    4,
+    '2018-04-02 :00:00:00',
+    '2021-04-02 :00:00:00'
+  );
+
 -- Client
 INSERT INTO
   `client` (
@@ -2334,7 +2380,7 @@ VALUES
 );
 
 INSERT INTO
-`commandeVelo`(
+`commandevelo`(
   `idCommande`,
   `idVelo`,
   `quantite`
@@ -2347,7 +2393,7 @@ VALUES
 );
 
 INSERT INTO
-`commandeVelo`(
+`commandevelo`(
   `idCommande`,
   `idVelo`,
   `quantite`
@@ -2360,7 +2406,7 @@ VALUES
 );
 
 INSERT INTO
-`commandeVelo`(
+`commandevelo`(
   `idCommande`,
   `idVelo`,
   `quantite`
@@ -2373,7 +2419,7 @@ VALUES
 );
 
 INSERT INTO
-`commandeVelo`(
+`commandevelo`(
   `idCommande`,
   `idVelo`,
   `quantite`
@@ -2386,7 +2432,7 @@ VALUES
 );
 
 INSERT INTO
-`commandeVelo`(
+`commandevelo`(
   `idCommande`,
   `idVelo`,
   `quantite`
@@ -2482,7 +2528,7 @@ VALUES
 
 -- fournisseur pièce
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2499,7 +2545,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2516,7 +2562,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2533,7 +2579,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2550,7 +2596,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2567,7 +2613,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2584,7 +2630,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2601,7 +2647,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2618,7 +2664,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2635,7 +2681,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2652,7 +2698,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2669,7 +2715,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2686,7 +2732,7 @@ VALUES
 );
 
 INSERT INTO
-`fournisseurPiece`(
+`fournisseurpiece`(
   `idFournisseur`,
   `idPiece`,
   `delai`,
@@ -2704,67 +2750,71 @@ VALUES
 
 -- historique abonnement
 INSERT INTO
-`historiqueAbonnement`(
+`historiqueabonnement`(
   `idClient`,
   `idAbonnement`
 )
 VALUES
 (
   2,
-  4
+  5
 );
 
 INSERT INTO
-`historiqueAbonnement`(
+`historiqueabonnement`(
   `idClient`,
   `idAbonnement`
 )
 VALUES
 (
   1,
-  4
+  6
 );
 
 INSERT INTO
-`historiqueAbonnement`(
+`historiqueabonnement`(
   `idClient`,
   `idAbonnement`
 )
 VALUES
 (
   3,
-  2
+  7
 );
 
 INSERT INTO
-`historiqueAbonnement`(
+`historiqueabonnement`(
   `idClient`,
   `idAbonnement`
 )
 VALUES
 (
   4,
-  1
+  5
 );
 
 INSERT INTO
-`historiqueAbonnement`(
+`historiqueabonnement`(
   `idClient`,
   `idAbonnement`
 )
 VALUES
 (
   6,
-  3
+  6
 );
 
 INSERT INTO
-`historiqueAbonnement`(
+`historiqueabonnement`(
   `idClient`,
   `idAbonnement`
 )
 VALUES
 (
   5,
-  1
+  6
 );
+
+DROP USER IF EXISTS 'bozo'@'localhost';
+CREATE USER 'bozo'@'localhost' IDENTIFIED BY 'bozo';
+GRANT SELECT ON Velomax.* TO 'bozo'@'localhost';

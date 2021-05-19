@@ -74,6 +74,11 @@ namespace VeloMax
         private void UpdatePiece_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = PiecesDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                MessageBox.Show("Vous devez sélectionner une ligne");
+                return;
+            }
             DateTime dateIntroduction = DateTime.ParseExact(data[4].ToString(), "dd/MM/yyyy HH:mm:ss", null);
             DateTime dateDiscontinuation = new DateTime();
             if (data[5].ToString() != "")
@@ -144,6 +149,11 @@ namespace VeloMax
         private void UpdateVelo_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = VelosDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                MessageBox.Show("Vous devez sélectionner une ligne");
+                return;
+            }
             DateTime dateIntroduction = DateTime.ParseExact(data[3].ToString(), "dd/MM/yyyy HH:mm:ss", null);
             DateTime dateDiscontinuation = new DateTime();
             if (data[4].ToString() != "")
@@ -214,6 +224,11 @@ namespace VeloMax
         private void UpdateClient_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = ClientsDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                MessageBox.Show("Vous devez sélectionner une ligne");
+                return;
+            }
             int id = Convert.ToInt32(data[0].ToString());
             bool estEntreprise = data[1].ToString() == "True";
             string siret = data[2].ToString();
@@ -293,6 +308,11 @@ namespace VeloMax
         private void UpdateFournisseur_Click(object sender, RoutedEventArgs e)
         {
             DataRowView data = FournisseursDataGrid.SelectedItem as DataRowView;
+            if (data == null)
+            {
+                MessageBox.Show("Vous devez sélectionner une ligne");
+                return;
+            }
             int id = Convert.ToInt32(data[0].ToString());
             string siret = data[1].ToString();
             string nom = data[2].ToString();
@@ -362,7 +382,7 @@ namespace VeloMax
             DataRowView data = CommandesDataGrid.SelectedItem as DataRowView;
             if (data == null)
             {
-                MessageBox.Show("Sélectionnez un client");
+                MessageBox.Show("Sélectionnez une commande");
                 return;
             }
             int id = Convert.ToInt32(data[0].ToString());
@@ -374,7 +394,7 @@ namespace VeloMax
             DataRowView data = ClientsDataGrid.SelectedItem as DataRowView;
             if (data == null)
             {
-                MessageBox.Show("Sélectionnez un client");
+                MessageBox.Show("Sélectionnez une commande");
                 return;
             }
             int id = Convert.ToInt32(data[0].ToString());

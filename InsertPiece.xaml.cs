@@ -51,9 +51,10 @@ namespace VeloMax
                     MessageBox.Show("Data not Inserted !");
                 }                
             }
-            catch
+            catch(Exception exc)
             {
-                MessageBox.Show("Les Champs renseignes ne sont pas valides");
+                //MessageBox.Show("Les Champs renseignes ne sont pas valides");
+                MessageBox.Show(exc.ToString());
             }
             finally
             {
