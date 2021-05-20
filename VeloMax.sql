@@ -2818,3 +2818,7 @@ VALUES
 DROP USER IF EXISTS 'bozo'@'localhost';
 CREATE USER 'bozo'@'localhost' IDENTIFIED BY 'bozo';
 GRANT SELECT ON Velomax.* TO 'bozo'@'localhost';
+
+
+
+SELECT * FROM abonnement WHERE dateFin < DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 60 DAY);

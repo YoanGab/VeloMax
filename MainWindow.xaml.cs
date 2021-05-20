@@ -550,21 +550,36 @@ namespace VeloMax
             Connection.Open();
             try
             {
-                string request = "SELECT * FROM historiqueAbonnement h JOIN client c ON c.id = h.idClient JOIN abonnement a ON h.idAbonnement = a.id;";
+                string request = "SELECT ha.idAbonnement FROM abonnement a " +
+                "JOIN client c ON c.idAbonnement = a.id "  +
+                "JOIN historiqueAbonnement ha ON c.id = ha.idClient " +
+                "WHERE dateFin < DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 60 DAY);";
                 MySqlCommand cmd = new MySqlCommand(request, Connection);
-                MySqlDataReader reader;
+                MySqlDataReader reader = cmd.ExecuteReader();
+                List<int> listAbonnements = new List<int>();
+
+                while(reader.Read()) 
+                {
+                    listAbonnements.Add(reader.GetInt32(0));
+                }
+                reader.Dispose();
+
+                request = "SELECT c.*, a.dateDebut, a.dateFin, pf.description, pf.prix, pf.rabais FROM abonnement a " +
+                "JOIN programmeFidelio pf ON a.idProgramme = pf.id " +
+                "JOIN historiqueAbonnement ha ON a.id = ha.idAbonnement " +
+                "JOIN client c ON c.id= ha.idClient " +
+                $"WHERE a.id IN ({String.Join(", ", listAbonnements)});";
+
+                cmd = new MySqlCommand(request, Connection);
                 reader = cmd.ExecuteReader();
+
                 DataTable dt = new DataTable();
                 dt.Load(reader);
 
                 string json = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
                 System.IO.File.WriteAllText("BDD_JSON.json", json);
-                /*
-                string JSONString = string.Empty;
-                JSONString = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
-                JSONExport.Text = JSONString;*/
 
-
+                MessageBox.Show("Data Exported !");
             }
             catch (Exception exc)
             {
@@ -581,36 +596,14 @@ namespace VeloMax
             Connection.Open();
             try
             {
-                string veloRequest = "SELECT * FROM velo WHERE quantite < 2;";
-                string pieceRequest = "SELECT * FROM piece WHERE quantite < 2;";
-                MySqlCommand cmd = new MySqlCommand(veloRequest, Connection);
+                string request = "SELECT * FROM piece WHERE quantite < 2;";
+                DataTable dt = new DataTable();
+                MySqlCommand cmd = new MySqlCommand(request, Connection);
                 MySqlDataReader reader;
                 reader = cmd.ExecuteReader();
-                DataTable dt = new DataTable();
                 dt.Load(reader);
-                System.IO.StringWriter writer = new System.IO.StringWriter();
-                dt.WriteXml(writer, XmlWriteMode.WriteSchema, true);
-
-                cmd = new MySqlCommand(pieceRequest, Connection);
-                reader = cmd.ExecuteReader();
-                DataTable dtPiece = new DataTable();
-                dtPiece.Load(reader);
-                
-                dtPiece.WriteXml("BDD_XML.xml");
-
-
-                /*
-                dtPiece.WriteXml(writer, XmlWriteMode.WriteSchema, true);
-                string dtxml = writer.ToString();
-                XMLExport.Text = dtxml;
-
-                XmlDocument docXml = new XmlDocument();
-                XmlElement veloRequest = docXml.CreateElement("SELECT * FROM velo WHERE quantite < 2;");
-                docXml.AppendChild(veloRequest);
-                XmlElement pieceRequest = docXml.CreateElement("SELECT * FROM piece WHERE quantite < 2;");
-                docXml.AppendChild(pieceRequest);*/
-                //docXml.Save("BDD_XML.xml");
-
+                dt.WriteXml("BDD_XML.xml");
+                MessageBox.Show("Data Exported !");
             }
             catch (Exception exc)
             {
