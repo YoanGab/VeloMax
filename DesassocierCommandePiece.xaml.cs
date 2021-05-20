@@ -136,7 +136,7 @@ namespace VeloMax
                 int temp = -1;
                 for (int i = 0; i < idPieces.Count(); i++)
                 {
-                    request =$"SELECT MIN(delai) FROM fournisseurPiece WHERE (idPiece = {idPieces[i]} AND quantite >= {quantitiesToBuy[i]});";
+                    request = $"SELECT MIN(delai) FROM fournisseurPiece WHERE (idPiece = {idPieces[i]} AND quantite >= {quantitiesToBuy[i]});";
                     cmd = new MySqlCommand(request, Connection);
                     try
                     {
@@ -148,6 +148,7 @@ namespace VeloMax
                         request = $"UPDATE commande SET delai = {-1} WHERE id = {IdCommande};";
                         cmd = new MySqlCommand(request, Connection);
                         cmd.ExecuteNonQuery();
+                        this.Close();
                         return;
                     }
 
@@ -168,8 +169,8 @@ namespace VeloMax
             finally
             {
                 Connection.Close();
+                this.Close();
             }
-            this.Close();
         }
     }
 }

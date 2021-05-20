@@ -1,5 +1,5 @@
-drop database if exists Velomax;
-CREATE DATABASE if not exists Velomax;
+DROP DATABASE IF EXISTS Velomax;
+CREATE DATABASE IF NOT EXISTS Velomax;
 
 use Velomax;
 CREATE TABLE `ligneProduit` (
@@ -1997,8 +1997,8 @@ INSERT INTO
 VALUES
   (
     3,
-    '2020-01-01 :00:00:00',
-    '2022-01-01 :00:00:00'
+    '2019-06-01 :00:00:00',
+    '2021-06-01 :00:00:00'
   );
   INSERT INTO
   `abonnement` (`idProgramme`, `dateDebut`, `dateFin`)
@@ -2055,9 +2055,22 @@ VALUES
   )
 VALUES
   (
-    4,
-    '2018-04-02 :00:00:00',
-    '2021-04-02 :00:00:00'
+    3,
+    '2014-04-02 :00:00:00',
+    '2016-04-02 :00:00:00'
+  );
+  
+  INSERT INTO
+  `abonnement` (
+    `idProgramme`,
+    `dateDebut`,
+    `dateFin`
+  )
+VALUES
+  (
+    3,
+    '2016-06-01 :00:00:00',
+    '2019-06-01 :00:00:00'
   );
 
 -- Client
@@ -2789,36 +2802,11 @@ INSERT INTO
 )
 VALUES
 (
-  4,
-  5
+  3,
+  8
 );
 
-INSERT INTO
-`historiqueAbonnement`(
-  `idClient`,
-  `idAbonnement`
-)
-VALUES
-(
-  6,
-  6
-);
-
-INSERT INTO
-`historiqueAbonnement`(
-  `idClient`,
-  `idAbonnement`
-)
-VALUES
-(
-  5,
-  6
-);
 
 DROP USER IF EXISTS 'bozo'@'localhost';
 CREATE USER 'bozo'@'localhost' IDENTIFIED BY 'bozo';
 GRANT SELECT ON Velomax.* TO 'bozo'@'localhost';
-
-
-
-SELECT * FROM abonnement WHERE dateFin < DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 60 DAY);
